@@ -2,7 +2,7 @@
     package="com.example.proyecto_bus">
    <application
         android:label="proyecto_bus"
-        android:name="${applicationName}"
+       
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
