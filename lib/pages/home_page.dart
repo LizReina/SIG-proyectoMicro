@@ -76,6 +76,7 @@ class _HomePageState extends State<HomePage> {
                     subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
                   ),
                   FeatureLayerOptions(
+                    //aquí va la url del proyecto arcmap
                     "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/USA_Congressional_Districts/FeatureServer/0",
                     "polygon",
                     onTap: (dynamic attributes, LatLng location) {
