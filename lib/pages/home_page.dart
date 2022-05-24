@@ -1,50 +1,57 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_arcgis/flutter_map_arcgis.dart';
-import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.orange,       
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 128, 15, 15),       
         elevation: 10,
         toolbarHeight: 70,
         centerTitle: true,
-        title: const Text('App Conductor'),
+        title: const Text('App Pasajero'),
       ),
       backgroundColor: Colors.white,
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
+            const DrawerHeader(
+              // ignore: sort_child_properties_last
               child: Text('App Pasajero'),
-              decoration: BoxDecoration(color: Colors.black),
+              decoration: BoxDecoration(color: Color.fromARGB(255, 155, 79, 79)),
             ),
             ListTile(
-              title: Text('Recorrido de Líneas'),
+              title: const Text('Recorrido de Líneas'),
               leading: Image.asset('assets/images/bus_icon.png', height: 40.0, width: 40.0,),
               onTap: () {
                 Navigator.pop(context);
               }
             ),
-            Divider(color: Colors.grey),
+            const Divider(color: Colors.grey),
             ListTile(
-              title: Text('Perfil'),
-              leading: Image.asset('assets/images/bus_icon.png', height: 40.0, width: 40.0,),
+              title: const Text('Perfil'),
+              leading: const Icon(Icons.person),
               onTap: () {
                 Navigator.pop(context);
               }
@@ -59,20 +66,19 @@ class _HomePageState extends State<HomePage> {
             Flexible(
               child: FlutterMap(
                 options: MapOptions(
-                  center: LatLng(32.91081899999999, -92.734876),
-                  zoom: 11.0,
-                  plugins: [EsriPlugin()],
+                center: LatLng(32.91081899999999, -92.734876),
+                zoom: 9.0,
+                plugins: [EsriPlugin()],
                 ),
                 layers: [
                   TileLayerOptions(
                     urlTemplate: 'http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
                     subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-                    tileProvider: const CachedNetworkTileProvider(),
                   ),
                   FeatureLayerOptions(
-                    url: "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/USA_Congressional_Districts/FeatureServer/0",
-                    geometryType:"polygon",
-                    onTap: (attributes, LatLng location) {
+                    "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/USA_Congressional_Districts/FeatureServer/0",
+                    "polygon",
+                    onTap: (dynamic attributes, LatLng location) {
                       // ignore: avoid_print
                       print(attributes);
                     },
@@ -85,26 +91,10 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                   ),
-                  FeatureLayerOptions(
-                    url: "https://services8.arcgis.com/1p2fLWyjYVpl96Ty/arcgis/rest/services/Forest_Service_Recreation_Opportunities/FeatureServer/0",
-                    geometryType:"point",
-                    render:(dynamic attributes){
-                      // You can render by attribute
-                      return Marker(
-                        width: 30.0,
-                        height: 30.0,
-                        builder: (ctx) => const Icon(Icons.pin_drop),
-                      );
-                    },
-                    onTap: (attributes, LatLng location) {
-                      // ignore: avoid_print
-                      print(attributes);
-                    },
-                  ),
-                ],
+                ],),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
