@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
+      debugShowMaterialGrid: false,
       initialRoute: '/',
       routes: {
         '/': (context) => const HomePage(),

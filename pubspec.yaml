@@ -13,9 +13,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_map: any
-  flutter_map_arcgis: any
-  dio: any
+  flutter_map: ^0.14.0
+  flutter_map_arcgis: ^2.0.0
+  dio: ^4.0.6
+  latlong2: ^0.8.1
 
   cupertino_icons: ^1.0.2
 
@@ -23,7 +24,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.1
 
 flutter:
   uses-material-design: true
