@@ -15,13 +15,12 @@ dependencies:
     sdk: flutter
   flutter_map: ^0.14.0
   flutter_map_arcgis: ^2.0.0
-  flutter_polyline_points: ^1.0.0
   dio: ^4.0.6
   latlong2: ^0.8.1
-  google_maps_flutter: ^2.1.6
-  material_floating_search_bar: ^0.3.7
+  textfield_search: ^0.10.0
 
   cupertino_icons: ^1.0.2
+  google_maps_flutter: ^2.1.6
 
 dev_dependencies:
   flutter_test:
