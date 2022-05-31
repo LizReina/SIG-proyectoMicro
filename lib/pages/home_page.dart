@@ -4,6 +4,8 @@ import 'package:flutter_map_arcgis/flutter_map_arcgis.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:proyecto_bus/routes/points/linea01.dart';
 import 'package:proyecto_bus/routes/points/linea02.dart';
+import 'package:proyecto_bus/routes/points/linea09.dart';
+import 'package:proyecto_bus/routes/points/linea10.dart';
 import 'package:proyecto_bus/widgets/collapsing_navigation_drawer.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   void initState() {
     super.initState();
@@ -30,10 +31,9 @@ class _HomePageState extends State<HomePage> {
         toolbarHeight: 70,
         centerTitle: true,
         title: const Text('App Pasajero'),
-      ),*/   
-      body: Stack(
-        children: <Widget> [
-          Padding(
+      ),*/
+      body: Stack(children: <Widget>[
+        Padding(
           padding: const EdgeInsets.all(0),
           child: Column(
             children: [
@@ -46,41 +46,56 @@ class _HomePageState extends State<HomePage> {
                   ),
                   layers: [
                     TileLayerOptions(
-                      urlTemplate: 'http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+                      urlTemplate:
+                          'http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
                       subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
                     ),
-                    PolylineLayerOptions(
-                      polylines: [
-                        Polyline(
+                    PolylineLayerOptions(polylines: [
+                      Polyline(
                           points: linea01I,
                           strokeWidth: 2.0,
-                          color: Colors.blue
-                        ),
-                        Polyline(
+                          color: Colors.blue),
+                      Polyline(
                           points: linea01V,
                           strokeWidth: 2.0,
-                          color: const Color.fromARGB(255, 14, 75, 125)
-                        ),
-                        Polyline(
+                          color: const Color.fromARGB(255, 14, 75, 125)),
+                      Polyline(
                           points: linea02I,
                           strokeWidth: 2.0,
-                          color: Colors.green
-                        ),
-                        Polyline(
+                          color: Colors.green),
+                      Polyline(
                           points: linea02V,
                           strokeWidth: 2.0,
-                          color: Colors.orange
-                        ),
-                      ]
-                    ),
-                  ],),
+                          color: Colors.orange),
+                      Polyline(
+                        points: linea09I,
+                        strokeWidth: 2.0,
+                        color: Color.fromARGB(255, 202, 213, 42),
+                      ),
+                      Polyline(
+                        points: linea09V,
+                        strokeWidth: 2.0,
+                        color: Colors.orange,
+                      ),
+                      Polyline(
+                        points: linea10I,
+                        strokeWidth: 2.0,
+                        color: Color.fromARGB(255, 136, 89, 238),
+                      ),
+                      Polyline(
+                        points: linea10V,
+                        strokeWidth: 2.0,
+                        color: Color.fromARGB(255, 236, 74, 74),
+                      ),
+                    ]),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          const CollapsingNavigationDrawer(),
-        ] 
-      ),
+        ),
+        const CollapsingNavigationDrawer(),
+      ]),
     );
   }
 }
