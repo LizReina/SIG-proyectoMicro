@@ -4,9 +4,7 @@
 
    <application
         android:label="proyecto_bus"
-       <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyAXEBG5q3ITYmrBGSVzq_Ob7tyRQ9F0KQE"/>
-        android:icon="@mipmap/ic_launcher">
+      >
         <activity
             android:name=".MainActivity"
             android:exported="true"

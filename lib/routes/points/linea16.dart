@@ -1,6 +1,6 @@
 import 'package:latlong2/latlong.dart';
 
-List<LatLng> linea02I = [
+List<LatLng> linea16I = [
   LatLng(-17.8241897, -63.1768429),
   LatLng(-17.82307419, -63.17689018),
   LatLng(-17.82206563, -63.17656671),
