@@ -4,8 +4,7 @@
 
    <application
         android:label="proyecto_bus"
-       
-        android:icon="@mipmap/ic_launcher">
+      >
         <activity
             android:name=".MainActivity"
             android:exported="true"
