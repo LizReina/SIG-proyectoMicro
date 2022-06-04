@@ -34,7 +34,7 @@ class _ShowLineaPageState extends State<ShowLineaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(50),
+        padding: const EdgeInsets.all(50),
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Form(

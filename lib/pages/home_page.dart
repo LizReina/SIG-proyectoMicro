@@ -11,7 +11,6 @@ import 'package:proyecto_bus/routes/points/linea08.dart';
 
 import 'package:proyecto_bus/routes/points/linea09.dart';
 import 'package:proyecto_bus/routes/points/linea10.dart';
-import 'package:proyecto_bus/routes/points/linea11.dart';
 import 'package:proyecto_bus/routes/points/linea16.dart';
 import 'package:proyecto_bus/routes/points/linea17.dart';
 import 'package:proyecto_bus/routes/points/linea18.dart';
@@ -35,14 +34,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      /*appBar: AppBar(
-        backgroundColor: drawerBackgroundColor,       
-        elevation: 10,
-        toolbarHeight: 70,
-        centerTitle: true,
-        title: const Text('App Pasajero'),
-      ),*/   
+    return Scaffold(  
       body: Stack(
         children: <Widget> [
           Padding(
@@ -63,45 +55,48 @@ class _HomePageState extends State<HomePage> {
                     ),
                     PolylineLayerOptions(
                       polylines: [
-                         Polyline(
+                        Polyline(
                           points: linea01I,
                           strokeWidth: 2.0,
-                          color: Colors.blue),
-                      Polyline(
+                          color: const Color.fromARGB(255, 14, 75, 125)
+                        ),
+                        Polyline(
                           points: linea01V,
                           strokeWidth: 2.0,
-                          color: const Color.fromARGB(255, 14, 75, 125)),
-                      Polyline(
+                          color: const Color.fromARGB(255, 108, 184, 245)
+                        ),
+                        Polyline(
                           points: linea02I,
                           strokeWidth: 2.0,
-                          color: Colors.green),
-                         Polyline(
+                          color: const Color.fromARGB(255, 74, 176, 78)
+                        ),
+                        Polyline(
                           points: linea02V,
                           strokeWidth: 2.0,
-                          color: Colors.green),
-
+                          color: const Color.fromARGB(255, 49, 106, 51)
+                        ),
                         Polyline(
                           points: linea05I,
                           strokeWidth: 2.0,
-                          color: Color.fromARGB(255, 250, 117, 8)),
+                          color: const Color.fromARGB(255, 250, 117, 8)),
                       Polyline(
                           points: linea05V,
                           strokeWidth: 2.0,
-                          color: Color.fromARGB(255, 236, 25, 166)),
+                          color: const Color.fromARGB(255, 236, 25, 166)),
 
                       Polyline(
                           points: linea08I,
                           strokeWidth: 2.0,
-                          color: Color.fromARGB(255, 51, 190, 233)),
+                          color: const Color.fromARGB(255, 51, 190, 233)),
                       Polyline(
                           points: linea08V,
                           strokeWidth: 2.0,
-                          color: Color.fromARGB(255, 40, 209, 68)),
+                          color: const Color.fromARGB(255, 40, 209, 68)),
 
                       Polyline(
                         points: linea09I,
                         strokeWidth: 2.0,
-                        color: Color.fromARGB(255, 202, 213, 42),
+                        color: const Color.fromARGB(255, 202, 213, 42),
                       ),
                       Polyline(
                         points: linea09V,
@@ -111,43 +106,43 @@ class _HomePageState extends State<HomePage> {
                       Polyline(
                         points: linea10I,
                         strokeWidth: 2.0,
-                        color: Color.fromARGB(255, 136, 89, 238),
+                        color: const Color.fromARGB(255, 136, 89, 238),
                       ),
                       Polyline(
                         points: linea10V,
                         strokeWidth: 2.0,
-                        color: Color.fromARGB(255, 236, 74, 74),
+                        color: const Color.fromARGB(255, 236, 74, 74),
                       ),
                      
                        Polyline(
                         points: linea16I,
                         strokeWidth: 2.0,
-                        color: Color.fromARGB(255, 236, 74, 74),
+                        color: const Color.fromARGB(255, 236, 74, 74),
                       ), Polyline(
                         points: linea16V,
                         strokeWidth: 2.0,
-                        color: Color.fromARGB(255, 236, 74, 74),
+                        color: const Color.fromARGB(255, 236, 74, 74),
                       ),
                         
                         Polyline(
                         points: linea17I,
                         strokeWidth: 2.0,
-                        color: Color.fromARGB(255, 236, 74, 74),
+                        color: const Color.fromARGB(255, 236, 74, 74),
                       ),
                        Polyline(
                         points: linea17V,
                         strokeWidth: 2.0,
-                        color: Color.fromARGB(255, 236, 74, 74),
+                        color: const Color.fromARGB(255, 236, 74, 74),
                       ),
                         Polyline(
                         points: linea18I,
                         strokeWidth: 2.0,
-                        color: Color.fromARGB(255, 236, 74, 74),
+                        color: const Color.fromARGB(255, 236, 74, 74),
                       ),
                           Polyline(
                         points: linea18V,
                         strokeWidth: 2.0,
-                        color: Color.fromARGB(255, 236, 74, 74),
+                        color: const Color.fromARGB(255, 236, 74, 74),
                       ),
                       ]
                     ),

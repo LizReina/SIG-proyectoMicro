@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_bus/models/navigation_model.dart';
 import 'package:proyecto_bus/pages/ver_lineas_page.dart';
 import 'package:proyecto_bus/widgets/collapsing_list_tile.dart';
-import 'package:proyecto_bus/widgets/theme.dart';
 
 class CollapsingNavigationDrawer extends StatefulWidget {
   const CollapsingNavigationDrawer({Key? key}) : super(key: key);
