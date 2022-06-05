@@ -6,6 +6,8 @@ import 'package:proyecto_bus/routes/points/linea01.dart';
 import 'package:proyecto_bus/routes/points/linea02.dart';
 import 'package:proyecto_bus/routes/points/linea09.dart';
 import 'package:proyecto_bus/routes/points/linea10.dart';
+import 'package:proyecto_bus/routes/points/linea17.dart';
+import 'package:proyecto_bus/routes/points/linea18.dart';
 import 'package:proyecto_bus/widgets/collapsing_navigation_drawer.dart';
 
 class HomePage extends StatefulWidget {
@@ -86,6 +88,26 @@ class _HomePageState extends State<HomePage> {
                         points: linea10V,
                         strokeWidth: 2.0,
                         color: Color.fromARGB(255, 236, 74, 74),
+                      ),
+                      Polyline(
+                        points: linea17I,
+                        strokeWidth: 2.0,
+                        color: Colors.indigo.shade200,
+                      ),
+                      Polyline(
+                        points: linea17V,
+                        strokeWidth: 2.0,
+                        color: Colors.indigo.shade400,
+                      ),
+                      Polyline(
+                        points: linea18I,
+                        strokeWidth: 2.0,
+                        color: Colors.brown,
+                      ),
+                      Polyline(
+                        points: linea18V,
+                        strokeWidth: 2.0,
+                        color: Colors.brown.shade400,
                       ),
                     ]),
                   ],
