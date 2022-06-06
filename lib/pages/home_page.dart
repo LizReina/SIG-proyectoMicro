@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(  
       body: Stack(
         children: <Widget> [
@@ -37,24 +38,14 @@ class _HomePageState extends State<HomePage> {
                     myLocationButtonEnabled: true,
                     polylines: rutas,
                   ),
+>>>>>>> 39e9bd1ee88bc21bbbd3ac2222ba79be04c77b18
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          const CollapsingNavigationDrawer(),
-        ] 
-      ),
+        ),
+        const CollapsingNavigationDrawer(),
+      ]),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-  
