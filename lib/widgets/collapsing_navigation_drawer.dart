@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_bus/models/navigation_model.dart';
+import 'package:proyecto_bus/pages/map_page.dart';
 import 'package:proyecto_bus/pages/ver_lineas_page.dart';
 import 'package:proyecto_bus/widgets/collapsing_list_tile.dart';
-import 'package:proyecto_bus/widgets/theme.dart';
 
 class CollapsingNavigationDrawer extends StatefulWidget {
   const CollapsingNavigationDrawer({Key? key}) : super(key: key);
@@ -78,8 +78,8 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                         print('Counter: $counter');
                         if (counter == 0) {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => const ShowLineaPage()));
-                        } else if (counter == 1) {
-                          //Desplegar Searchbar
+                        } else if (counter == 2) {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const MapPage()));
                         } 
                       });
                     },
