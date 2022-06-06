@@ -5,6 +5,10 @@
    <application
         android:label="proyecto_bus"
       >
+
+      <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyAWK2Dq20L5JoumCwTyl0tYG6UjM_on960"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

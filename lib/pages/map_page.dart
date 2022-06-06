@@ -10,15 +10,17 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  final camara = const CameraPosition(
-    target: LatLng(0, 0),
+  final _initialCameraPosition = const CameraPosition(
+    target: LatLng(-17.78629, -63.18117),
+    zoom: 15
   );
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: GoogleMap(initialCameraPosition: camara),
+      body: GoogleMap(
+        initialCameraPosition: _initialCameraPosition
+      ),
     );
   }
 }
