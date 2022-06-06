@@ -18,7 +18,6 @@ import 'package:proyecto_bus/routes/points/linea18.dart';
 
 import 'package:proyecto_bus/widgets/collapsing_navigation_drawer.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -42,10 +41,9 @@ class _HomePageState extends State<HomePage> {
         toolbarHeight: 70,
         centerTitle: true,
         title: const Text('App Pasajero'),
-      ),*/   
-      body: Stack(
-        children: <Widget> [
-          Padding(
+      ),*/
+      body: Stack(children: <Widget>[
+        Padding(
           padding: const EdgeInsets.all(0),
           child: Column(
             children: [
@@ -58,12 +56,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                   layers: [
                     TileLayerOptions(
-                      urlTemplate: 'http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+                      urlTemplate:
+                          'http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
                       subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
                     ),
-                    PolylineLayerOptions(
-                      polylines: [
-                         Polyline(
+                    PolylineLayerOptions(polylines: [
+                      Polyline(
                           points: linea01I,
                           strokeWidth: 2.0,
                           color: Colors.blue),
@@ -75,12 +73,11 @@ class _HomePageState extends State<HomePage> {
                           points: linea02I,
                           strokeWidth: 2.0,
                           color: Colors.green),
-                         Polyline(
+                      Polyline(
                           points: linea02V,
                           strokeWidth: 2.0,
                           color: Colors.green),
-
-                        Polyline(
+                      Polyline(
                           points: linea05I,
                           strokeWidth: 2.0,
                           color: Color.fromARGB(255, 250, 117, 8)),
@@ -88,7 +85,6 @@ class _HomePageState extends State<HomePage> {
                           points: linea05V,
                           strokeWidth: 2.0,
                           color: Color.fromARGB(255, 236, 25, 166)),
-
                       Polyline(
                           points: linea08I,
                           strokeWidth: 2.0,
@@ -97,7 +93,6 @@ class _HomePageState extends State<HomePage> {
                           points: linea08V,
                           strokeWidth: 2.0,
                           color: Color.fromARGB(255, 40, 209, 68)),
-
                       Polyline(
                         points: linea09I,
                         strokeWidth: 2.0,
@@ -118,58 +113,45 @@ class _HomePageState extends State<HomePage> {
                         strokeWidth: 2.0,
                         color: Color.fromARGB(255, 236, 74, 74),
                       ),
-                     
-                       Polyline(
+                      Polyline(
                         points: linea16I,
                         strokeWidth: 2.0,
                         color: Color.fromARGB(255, 236, 74, 74),
-                      ), Polyline(
+                      ),
+                      Polyline(
                         points: linea16V,
                         strokeWidth: 2.0,
                         color: Color.fromARGB(255, 236, 74, 74),
                       ),
-                        
-                        Polyline(
+                      Polyline(
                         points: linea17I,
                         strokeWidth: 2.0,
-                        color: Color.fromARGB(255, 236, 74, 74),
+                        color: Color.fromARGB(255, 137, 255, 100),
                       ),
-                       Polyline(
+                      Polyline(
                         points: linea17V,
                         strokeWidth: 2.0,
-                        color: Color.fromARGB(255, 236, 74, 74),
+                        color: Color.fromARGB(255, 81, 153, 14),
                       ),
-                        Polyline(
+                      Polyline(
                         points: linea18I,
                         strokeWidth: 2.0,
-                        color: Color.fromARGB(255, 236, 74, 74),
+                        color: Color.fromARGB(255, 173, 171, 31),
                       ),
-                          Polyline(
+                      Polyline(
                         points: linea18V,
                         strokeWidth: 2.0,
-                        color: Color.fromARGB(255, 236, 74, 74),
+                        color: Color.fromARGB(255, 126, 128, 8),
                       ),
-                      ]
-                    ),
-                  ],),
+                    ]),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          const CollapsingNavigationDrawer(),
-        ] 
-      ),
+        ),
+        const CollapsingNavigationDrawer(),
+      ]),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-  
