@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:proyecto_bus/routes/polylines/polylinesg.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({Key? key}) : super(key: key);
@@ -10,15 +11,19 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  final camara = const CameraPosition(
-    target: LatLng(0, 0),
+  final _initialCameraPosition = const CameraPosition(
+    target: LatLng(-17.78629, -63.18117),
+    zoom: 13
   );
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: GoogleMap(initialCameraPosition: camara),
+      body: GoogleMap(
+        initialCameraPosition: _initialCameraPosition,
+        myLocationButtonEnabled: true,
+        polylines: rutasg,
+      ),
     );
   }
 }
