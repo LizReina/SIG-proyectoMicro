@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:proyecto_bus/routes/points/linea05.dart';
 import 'package:proyecto_bus/routes/points/linea05V.dart';
 
-final List<Polyline> linea05 = [
+final Set<Polyline> linea05 = {
   Polyline(
-      points: linea05I,
-      strokeWidth: 2.0,
-      color: const Color.fromARGB(255, 129, 35, 146)),
+    polylineId: const PolylineId('L05I'),
+    points: linea05I,
+    width: 2,
+    color: const Color.fromARGB(255, 129, 35, 146)
+  ),
   Polyline(
-      points: linea05V,
-      strokeWidth: 2.0,
-      color: const Color.fromARGB(255, 227, 146, 25)),
-];
+    polylineId: const PolylineId('L05V'),
+    points: linea05V,
+    width: 2,
+    color: const Color.fromARGB(255, 227, 146, 25)
+  ),
+};

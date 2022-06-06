@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_map_arcgis/flutter_map_arcgis.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:proyecto_bus/routes/polylines/all_lineas.dart';
 import 'package:proyecto_bus/widgets/collapsing_navigation_drawer.dart';
 
@@ -14,6 +12,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _initialCameraPosition = const CameraPosition(
+    target: LatLng(-17.78629, -63.18117),
+    zoom: 13
+  );
+
   @override
   void initState() {
     super.initState();
@@ -25,25 +28,15 @@ class _HomePageState extends State<HomePage> {
       body: Stack(
         children: <Widget> [
           Padding(
-          padding: const EdgeInsets.all(0),
-          child: Column(
-            children: [
-              Flexible(
-                child: FlutterMap(
-                  options: MapOptions(
-                    center: LatLng(-17.78629, -63.18117),
-                    zoom: 13.0,
-                    plugins: [EsriPlugin()],
+            padding: const EdgeInsets.all(0),
+            child: Column(
+              children: [
+                Flexible(
+                  child: GoogleMap(
+                    initialCameraPosition: _initialCameraPosition,
+                    myLocationButtonEnabled: true,
+                    polylines: rutas,
                   ),
-                  layers: [
-                    TileLayerOptions(
-                      urlTemplate: 'http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
-                      subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-                    ),
-                    PolylineLayerOptions(
-                      polylines: rutas
-                    ),
-                  ],),
                 ),
               ],
             ),
