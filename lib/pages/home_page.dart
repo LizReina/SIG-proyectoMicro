@@ -12,10 +12,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _initialCameraPosition = const CameraPosition(
-    target: LatLng(-17.78629, -63.18117),
-    zoom: 13
-  );
+  final _initialCameraPosition =
+      const CameraPosition(target: LatLng(-17.78629, -63.18117), zoom: 17);
 
   @override
   void initState() {
@@ -24,21 +22,17 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(  
-      body: Stack(
-        children: <Widget> [
-          Padding(
-            padding: const EdgeInsets.all(0),
-            child: Column(
-              children: [
-                Flexible(
-                  child: GoogleMap(
-                    initialCameraPosition: _initialCameraPosition,
-                    myLocationButtonEnabled: true,
-                    polylines: rutas,
-                  ),
->>>>>>> 39e9bd1ee88bc21bbbd3ac2222ba79be04c77b18
+    return Scaffold(
+      body: Stack(children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(0),
+          child: Column(
+            children: [
+              Flexible(
+                child: GoogleMap(
+                  initialCameraPosition: _initialCameraPosition,
+                  myLocationButtonEnabled: true,
+                  polylines: rutas,
                 ),
               ),
             ],
