@@ -24,7 +24,6 @@ class HomePage extends StatelessWidget {
                       builder: (_, controller, __) => GoogleMap(
                         circles: controller.circles,
                         polylines: controller.polylines,
-                        //markers: controller.markers,
                         initialCameraPosition: controller.initialCameraPosition,
                         myLocationButtonEnabled: true,
                         //polylines: rutas,
