@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:proyecto_bus/routes/polylines/polylinesg.dart';
+import 'package:proyecto_bus/routes/polylines/all_lineas.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class _MapPageState extends State<MapPage> {
       body: GoogleMap(
         initialCameraPosition: _initialCameraPosition,
         myLocationButtonEnabled: true,
-        polylines: rutasg,
+        polylines: rutas,
       ),
     );
   }
