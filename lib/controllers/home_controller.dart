@@ -46,6 +46,10 @@ class HomeController extends ChangeNotifier {
     );
     circles.add(circle);
     polylines = ruta.obtPolylines(circle);
+    final container = Container(
+      width: 20,
+      height: 40,
+    );
     notifyListeners();
   }
 }
