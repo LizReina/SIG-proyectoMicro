@@ -12,9 +12,8 @@ class CollapsingNavigationDrawer extends StatefulWidget {
       _CollapsingNavigationDrawerState();
 }
 
-class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
-    with SingleTickerProviderStateMixin {
-  double maxWidth = 150;
+class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer> with SingleTickerProviderStateMixin {
+  double maxWidth = 70; //250
   double minWidth = 70;
   bool isCollapsed = false;
   late AnimationController _animationController;
@@ -51,9 +50,8 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
         color: Colors.transparent,
         child: Column(
           children: <Widget>[
-            const SizedBox(
-              height: 50.0,
-            ),
+            const SizedBox(height: 50.0,),
+            /*
             InkWell(
                 onTap: () {
                   setState(() {
@@ -76,6 +74,9 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
               color: Colors.grey,
               height: 12.0,
             ),
+            */
+            const SizedBox(height: 50.0,),
+            const Divider(color: Colors.grey, height: 12.0,),
             Expanded(
               child: ListView.separated(
                 separatorBuilder: (context, counter) {
