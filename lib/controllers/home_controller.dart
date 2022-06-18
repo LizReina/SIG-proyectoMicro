@@ -10,7 +10,6 @@ class HomeController extends ChangeNotifier {
   final Map<CircleId, Circle> _circles = {};
 
   Set<Marker> get markers => _markers.values.toSet();
-  //Set<Circle> get circles => _circles.values.toSet();
   Set<Polyline> polylines = {};
   Set<Circle> circles = {};
   
@@ -46,9 +45,11 @@ class HomeController extends ChangeNotifier {
       strokeColor:  Colors.blue.shade100.withOpacity(0.1),
     );
     circles.add(circle);
-    //_circles[circleId] = circle;
     polylines = ruta.obtPolylines(circle);
+    final container = Container(
+      width: 20,
+      height: 40,
+    );
     notifyListeners();
   }
-
 }

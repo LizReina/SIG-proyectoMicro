@@ -14,7 +14,7 @@ dependencies:
   flutter:
     sdk: flutter
   textfield_search: ^0.10.0
-
+  http: ^0.13.4
   cupertino_icons: ^1.0.2
   google_maps_flutter: ^2.1.6
   provider: ^5.0.0
