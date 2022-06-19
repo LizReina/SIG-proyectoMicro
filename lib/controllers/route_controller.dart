@@ -25,6 +25,8 @@ class RouteController {
     '17': linea17,
     '18': linea18
   };
+  
+  
 
   bool dentroRadio(double latO, double lngO, double latD, double lngD) {
     double radius = 0.002355222456223941;
@@ -61,4 +63,6 @@ class RouteController {
     });
     return list;
   }
+
+  static get linea11 => null;
 }
