@@ -9,6 +9,7 @@ import 'package:proyecto_bus/routes/polylines/linea10.dart';
 import 'package:proyecto_bus/routes/polylines/linea16.dart';
 import 'package:proyecto_bus/routes/polylines/linea17.dart';
 import 'package:proyecto_bus/routes/polylines/linea18.dart';
+import 'package:proyecto_bus/variables.dart';
 import '../routes/lineas/rutas.dart';
 import '../routes/polylines/linea11.dart';
 import '../widgets/collapsing_navigation_drawer.dart';
@@ -22,6 +23,7 @@ class ShowLineaPage extends StatefulWidget {
 }
 
 class _SearchListState extends State {
+
   @override
   Widget build(BuildContext context) {
     final List<Rutas> linea = [
@@ -36,10 +38,12 @@ class _SearchListState extends State {
       Rutas('linea 17', linea17),
       Rutas('linea 18', linea18),
     ];
+
     return Scaffold(
       appBar: AppBar(
         title: ListTile(
           onTap: () {
+            counter = 1;
             showSearch(
               context: context,
               delegate: SearchCountryDelegate(linea),
@@ -49,12 +53,13 @@ class _SearchListState extends State {
         ),
       ),
       body: ListView.builder(
-          itemCount: linea.length,
-          itemBuilder: (_, index) {
-            return const ListTile(
-              title: Text(""),
-            );
-          }),
+        itemCount: linea.length,
+        itemBuilder: (_, index) {
+          return const ListTile(
+            title: Text(""),
+          );
+        }
+      ),
     );
   }
 }
@@ -62,10 +67,9 @@ class _SearchListState extends State {
 class SearchCountryDelegate extends SearchDelegate<Rutas> {
   // ignore: non_constant_identifier_names
   final List<Rutas> linea;
-
   List<Rutas> _filter = [];
-
   SearchCountryDelegate(this.linea);
+
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -79,9 +83,8 @@ class SearchCountryDelegate extends SearchDelegate<Rutas> {
   }
 
   @override
+  // ignore: body_might_complete_normally_nullable
   Widget? buildLeading(BuildContext context) {
-    // ignore: todo
-    // TODO: implement buildLeading
     IconButton(
       onPressed: () {
         close(context, Rutas('', 0));
@@ -92,7 +95,6 @@ class SearchCountryDelegate extends SearchDelegate<Rutas> {
 
   @override
   Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
     return ListView.builder(
       itemCount: _filter.length,
       itemBuilder: (_, index) {
@@ -105,37 +107,35 @@ class SearchCountryDelegate extends SearchDelegate<Rutas> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
     _filter = linea.where((linea) {
       return linea.name.toLowerCase().contains(query.trim().toLowerCase());
     }).toList();
     return ListView.builder(
-        itemCount: _filter.length,
-        itemBuilder: (_, index) {
-          return ListTile(
-            title: Text(_filter[index].name),
-            onTap: () {
-              var ruta = _filter[index].Polyline;
-              //print(ruta);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => RutaPage(
-                            lin: ruta,
-                          )));
-            },
-          );
-        });
+      itemCount: _filter.length,
+      itemBuilder: (_, index) {
+        return ListTile(
+          title: Text(_filter[index].name),
+          onTap: () {
+            var ruta = _filter[index].Polyline;
+            //print(ruta);
+            Navigator.push(context,MaterialPageRoute(
+              builder: (context) => RutaPage(lin: ruta,)
+            ));
+          },
+        );
+      }
+    );
   }
 }
 
+// ignore: must_be_immutable
 class RutaPage extends StatefulWidget {
+  // ignore: prefer_typing_uninitialized_variables
   var lin;
   RutaPage({Key? key, required this.lin}) : super(key: key);
 
   @override
-  // TODO: implement createState
-  // ignore: library_private_types_in_public_api, no_logic_in_create_state
+  // ignore: library_private_types_in_public_api
   _RutasPageState createState() => _RutasPageState();
 }
 
@@ -144,8 +144,11 @@ class _RutasPageState extends State<RutaPage> {
       const CameraPosition(target: LatLng(-17.78629, -63.18117), zoom: 13);
 
   @override
+  // ignore: override_on_non_overriding_member
   void iniState() {
+    // ignore: unused_local_variable
     var lin = widget.lin;
+    counter = 1;
     super.initState();
   }
 

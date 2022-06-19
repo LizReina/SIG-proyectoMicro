@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:proyecto_bus/routes/points/linea05.dart';
-import 'package:proyecto_bus/routes/points/linea05V.dart';
 
 final Set<Polyline> linea05 = {
   Polyline(

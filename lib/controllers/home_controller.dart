@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:proyecto_bus/controllers/route_controller.dart';
+import 'package:proyecto_bus/variables.dart';
 
 class HomeController extends ChangeNotifier {
   RouteController ruta = RouteController();
@@ -10,6 +11,7 @@ class HomeController extends ChangeNotifier {
   final Map<CircleId, Circle> _circles = {};
 
   Set<Marker> get markers => _markers.values.toSet();
+
   Set<Polyline> polylines = {};
   Set<Circle> circles = {};
   
@@ -17,6 +19,20 @@ class HomeController extends ChangeNotifier {
     target: LatLng(-17.78629, -63.18117),
     zoom: 13
   );
+
+  void onTap(LatLng position) {
+    final circleId = CircleId(_circles.length.toString());
+    final circle = Circle(
+      circleId: circleId,
+      center: position,
+      radius: 100,
+      fillColor: Colors.blue.shade100.withOpacity(0.5),
+      strokeColor:  Colors.blue.shade100.withOpacity(0.1),
+    );
+    circles.add(circle);
+    polylines = ruta.obtPolylines(circle);
+    notifyListeners();
+  }
 
   void onTap1(LatLng position) {
     final markerId = MarkerId(_markers.length.toString());
@@ -32,24 +48,7 @@ class HomeController extends ChangeNotifier {
       }
     );
     _markers[markerId] = marker;
-    notifyListeners();
-  }
-
-  void onTap(LatLng position) {
-    final circleId = CircleId(_circles.length.toString());
-    final circle = Circle(
-      circleId: circleId,
-      center: position,
-      radius: 100,
-      fillColor: Colors.blue.shade100.withOpacity(0.5),
-      strokeColor:  Colors.blue.shade100.withOpacity(0.1),
-    );
-    circles.add(circle);
-    polylines = ruta.obtPolylines(circle);
-    final container = Container(
-      width: 20,
-      height: 40,
-    );
+    counter = 0;
     notifyListeners();
   }
 }
