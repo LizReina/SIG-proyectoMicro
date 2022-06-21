@@ -17,20 +17,46 @@ class HomePage extends StatelessWidget {
           children: <Widget> [
             Padding(
               padding: const EdgeInsets.all(0),
-              child: Column(
-                children: [
-                  Flexible(
-                    child: Consumer<HomeController>(
-                      builder: (_, controller, __) => GoogleMap(
-                        circles: controller.circles,
-                        polylines: controller.polylines,
-                        initialCameraPosition: controller.initialCameraPosition,
-                        myLocationButtonEnabled: true,
-                        onTap: controller.onTap,
+              child: Consumer<HomeController>(
+                builder: (_, controller, __) => Column(
+                  children: [
+                    Flexible(
+                      child: GoogleMap(
+                          circles: controller.circles,
+                          polylines: controller.polylines,
+                          initialCameraPosition: controller.initialCameraPosition,
+                          myLocationButtonEnabled: true,
+                          onTap: controller.onTap,
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.bottomCenter,
+                      height: 200,
+                      width: 200,
+                      child: ListView.builder(
+                        itemCount: controller.listpoly.length,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: ListTile(
+                                title: Text(
+                                  controller.listpoly[index].polylineId.toString(),
+                                  style: const TextStyle(fontSize: 20,),
+                                ),
+                                leading: CircleAvatar(
+                                  child: Container(
+                                    color: controller.listpoly[index].color,
+                                  )
+                                )
+                              )
+                            )
+                          );
+                        }
                       ),
                     )
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             const CollapsingNavigationDrawer(),

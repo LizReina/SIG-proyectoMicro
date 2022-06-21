@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_bus/models/navigation_model.dart';
-import 'package:proyecto_bus/pages/home_page.dart';
-import 'package:proyecto_bus/pages/ver_lineas_page.dart';
 import 'package:proyecto_bus/widgets/collapsing_list_tile.dart';
 
 class CollapsingNavigationDrawer extends StatefulWidget {
@@ -86,15 +84,9 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                         // ignore: avoid_print
                         print('Counter: $counter');
                         if (counter == 0) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const HomePage()));
+                          Navigator.pushNamed(context, '/');
                         } else if (counter == 1) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ShowLineaPage()));
+                          Navigator.pushNamed(context, '/lineas');
                         }
                       });
                     },

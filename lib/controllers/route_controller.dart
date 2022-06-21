@@ -33,21 +33,6 @@ class RouteController {
     return (distance < radius);
   }
 
-  List<Polyline> getPolylines(double latO, double lngO) {
-    List<Polyline> list = [];
-    rutas.forEach((key, value) {
-      value.elementAt(0).points.forEach((element) {
-        if (dentroRadio(latO, lngO, element.latitude, element.longitude)) {
-          list.add(value.elementAt(0));
-        }
-        if(dentroRadio(latO, lngO, element.latitude, element.longitude)){
-          list.add(value.elementAt(1));
-        }
-      });
-    });
-    return list;
-  }
-
   Set<Polyline> obtPolylines(Circle circle) {
     Set<Polyline> list = {};
     rutas.forEach((key, value) {
@@ -61,5 +46,22 @@ class RouteController {
       });
     });
     return list;
+  }
+
+  List<Polyline> getPolylines(double latO, double lngO) {
+    List<Polyline> list = [];
+    List<Polyline> result = [];
+    rutas.forEach((key, value) {
+      value.elementAt(0).points.forEach((element) {
+        if (dentroRadio(latO, lngO, element.latitude, element.longitude)) {
+          list.add(value.elementAt(0));
+        }
+        if(dentroRadio(latO, lngO, element.latitude, element.longitude)){
+          list.add(value.elementAt(1));
+        }
+      });
+    });
+    result = list.toSet().toList();
+    return result;
   }
 }
