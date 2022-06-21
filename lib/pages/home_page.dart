@@ -29,8 +29,10 @@ class HomePage extends StatelessWidget {
                           myLocationButtonEnabled: true,
                           onTap: controller.onTap,
                       ),
-                    ),                    
-                    SizedBox(
+                    ), 
+                    (controller.listpoly.isEmpty) 
+                    ? const SizedBox(width: 2, height: 2,)                  
+                    : SizedBox(
                       height: 150,
                       child: SingleChildScrollView(
                         child: controller.listpoly.isEmpty
