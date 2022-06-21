@@ -28,31 +28,39 @@ class HomePage extends StatelessWidget {
                           myLocationButtonEnabled: true,
                           onTap: controller.onTap,
                       ),
-                    ),
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      height: 200,
-                      width: 200,
-                      child: ListView.builder(
-                        itemCount: controller.listpoly.length,
-                        itemBuilder: (context, index) {
-                          return Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: ListTile(
-                                title: Text(
-                                  controller.listpoly[index].polylineId.toString(),
-                                  style: const TextStyle(fontSize: 20,),
-                                ),
-                                leading: CircleAvatar(
-                                  child: Container(
-                                    color: controller.listpoly[index].color,
+                    ),                    
+                    SizedBox(
+                      height: 150,
+                      child: SingleChildScrollView(
+                        child: controller.listpoly.isEmpty
+                        ? const SizedBox(width: 2, height: 2,)
+                        : Column(
+                            children: controller.listpoly.map((poly) {
+                              return GestureDetector(
+                                onTap: () {},
+                                child: Container(
+                                  padding: const EdgeInsets.only(left: 20, right: 20),
+                                  height: 70,
+                                  child: Card(
+                                    elevation: 10.0,
+                                    shadowColor: Colors.grey.withOpacity(0.5),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    child: ListTile(
+                                      title: Text(
+                                        poly.polylineId.value.toString(),
+                                        style: const TextStyle(fontSize: 20,),
+                                      ),
+                                      leading: CircleAvatar(
+                                        backgroundColor: poly.color,
+                                      )
+                                    )
                                   )
                                 )
-                              )
-                            )
-                          );
-                        }
+                              );
+                            }).toList(),
+                          )
                       ),
                     )
                   ],
