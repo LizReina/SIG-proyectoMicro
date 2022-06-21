@@ -22,7 +22,7 @@ class HomeController extends ChangeNotifier {
     final circle = Circle(
       circleId: circleId,
       center: position,
-      radius: 100,
+      radius: 120,
       fillColor: Colors.blue.shade100.withOpacity(0.5),
       strokeColor:  Colors.blue.shade100.withOpacity(0.1),
     );

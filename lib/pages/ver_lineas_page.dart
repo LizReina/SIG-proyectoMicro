@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:proyecto_bus/routes/lineas/rutas.dart';
 import 'package:proyecto_bus/routes/polylines/linea01.dart';
 import 'package:proyecto_bus/routes/polylines/linea02.dart';
 import 'package:proyecto_bus/routes/polylines/linea05.dart';
 import 'package:proyecto_bus/routes/polylines/linea08.dart';
 import 'package:proyecto_bus/routes/polylines/linea09.dart';
 import 'package:proyecto_bus/routes/polylines/linea10.dart';
+import 'package:proyecto_bus/routes/polylines/linea11.dart';
 import 'package:proyecto_bus/routes/polylines/linea16.dart';
 import 'package:proyecto_bus/routes/polylines/linea17.dart';
 import 'package:proyecto_bus/routes/polylines/linea18.dart';
 import 'package:proyecto_bus/variables.dart';
-import '../routes/lineas/rutas.dart';
-import '../routes/polylines/linea11.dart';
-import '../widgets/collapsing_navigation_drawer.dart';
+import 'package:proyecto_bus/widgets/collapsing_navigation_drawer.dart';
 
 class ShowLineaPage extends StatefulWidget {
   const ShowLineaPage({Key? key}) : super(key: key);

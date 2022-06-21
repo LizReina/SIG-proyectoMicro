@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_bus/controllers/home_controller.dart';
+import 'package:proyecto_bus/pages/ver_lineas_page.dart';
 import 'package:proyecto_bus/widgets/collapsing_navigation_drawer.dart';
 
 // ignore: must_be_immutable
@@ -37,7 +38,12 @@ class HomePage extends StatelessWidget {
                         : Column(
                             children: controller.listpoly.map((poly) {
                               return GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  Set<Polyline> polyline = {poly};
+                                  Navigator.push(context,MaterialPageRoute(
+                                    builder: (context) => RutaPage(lin: polyline,)
+                                  ));
+                                },
                                 child: Container(
                                   padding: const EdgeInsets.only(left: 20, right: 20),
                                   height: 70,
