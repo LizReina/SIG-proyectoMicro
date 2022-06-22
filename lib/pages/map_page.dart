@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:proyecto_bus/routes/markers/markers.dart';
 import 'package:proyecto_bus/routes/polylines/all_lineas.dart';
 
 class MapPage extends StatefulWidget {
@@ -23,6 +24,7 @@ class _MapPageState extends State<MapPage> {
         initialCameraPosition: _initialCameraPosition,
         myLocationButtonEnabled: true,
         polylines: rutas,
+        markers: markers,
       ),
     );
   }

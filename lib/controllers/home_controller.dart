@@ -8,6 +8,7 @@ class HomeController extends ChangeNotifier {
   
   final Map<CircleId, Circle> _circles = {};
 
+  Set<Marker> markers = {};
   Set<Polyline> polylines = {};
   Set<Circle> circles = {};
   List<Polyline> listpoly = [];
@@ -29,6 +30,7 @@ class HomeController extends ChangeNotifier {
     circles.add(circle);
     polylines = ruta.obtPolylines(circle);
     listpoly = ruta.getPolylines(circle.center.latitude, circle.center.longitude);
+    markers = ruta.getMarkers(polylines);
     notifyListeners();
   }
 }

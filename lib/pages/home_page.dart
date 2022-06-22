@@ -25,6 +25,7 @@ class HomePage extends StatelessWidget {
                       child: GoogleMap(
                           circles: controller.circles,
                           polylines: controller.polylines,
+                          markers: controller.markers,
                           initialCameraPosition: controller.initialCameraPosition,
                           myLocationButtonEnabled: true,
                           onTap: controller.onTap,
@@ -43,6 +44,7 @@ class HomePage extends StatelessWidget {
                                 onTap: () {
                                   Set<Polyline> polyline = {poly};
                                   Navigator.push(context,MaterialPageRoute(
+                                    //AGREGAR MARKERS DE PARTIDA Y LLEGADA
                                     builder: (context) => RutaPage(lin: polyline,)
                                   ));
                                 },

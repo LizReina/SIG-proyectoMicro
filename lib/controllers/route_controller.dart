@@ -48,6 +48,27 @@ class RouteController {
     return list;
   }
 
+  Set<Marker> getMarkers(Set<Polyline> polylines) {
+    Set<Marker> markers = {};
+    for (var element in polylines) {
+      Set<Marker> puntos = { Marker(
+        markerId: MarkerId('${element.polylineId.value}Partida'),
+        position: element.points.first,
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+        infoWindow: const InfoWindow(title: 'Partida'),
+      ),
+      Marker(
+        markerId: MarkerId('${element.polylineId.value}Llegada'),
+        position: element.points.last,
+        infoWindow: const InfoWindow(title: 'Llegada'),
+      ),};
+      //markers.add(llegada);
+      //markers.add(partida);
+      markers.addAll(puntos);
+    }
+    return markers;
+  }
+
   List<Polyline> getPolylines(double latO, double lngO) {
     List<Polyline> list = [];
     List<Polyline> result = [];
