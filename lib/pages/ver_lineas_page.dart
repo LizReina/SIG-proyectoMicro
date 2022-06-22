@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api, body_might_complete_normally_nullable, must_be_immutable, prefer_typing_uninitialized_variables, override_on_non_overriding_member, unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:proyecto_bus/routes/lineas/rutas.dart';
@@ -18,7 +20,6 @@ class ShowLineaPage extends StatefulWidget {
   const ShowLineaPage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _SearchListState createState() => _SearchListState();
 }
 
@@ -27,16 +28,16 @@ class _SearchListState extends State {
   @override
   Widget build(BuildContext context) {
     final List<Rutas> linea = [
-      Rutas("linea 1", linea01),
-      Rutas('linea 2', linea02),
-      Rutas('linea 5', linea05),
-      Rutas('linea 8', linea08),
-      Rutas('linea 9', linea09),
-      Rutas('linea 10', linea10),
-      Rutas('linea 11', linea11),
-      Rutas('linea 16', linea16),
-      Rutas('linea 17', linea17),
-      Rutas('linea 18', linea18),
+      Rutas("Linea 1", linea01),
+      Rutas('Linea 2', linea02),
+      Rutas('Linea 5', linea05),
+      Rutas('Linea 8', linea08),
+      Rutas('Linea 9', linea09),
+      Rutas('Linea 10', linea10),
+      Rutas('Linea 11', linea11),
+      Rutas('Linea 16', linea16),
+      Rutas('Linea 17', linea17),
+      Rutas('Linea 18', linea18),
     ];
 
     return Scaffold(
@@ -65,7 +66,6 @@ class _SearchListState extends State {
 }
 
 class SearchCountryDelegate extends SearchDelegate<Rutas> {
-  // ignore: non_constant_identifier_names
   final List<Rutas> linea;
   List<Rutas> _filter = [];
   SearchCountryDelegate(this.linea);
@@ -83,11 +83,10 @@ class SearchCountryDelegate extends SearchDelegate<Rutas> {
   }
 
   @override
-  // ignore: body_might_complete_normally_nullable
   Widget? buildLeading(BuildContext context) {
     IconButton(
       onPressed: () {
-        close(context, Rutas('', 0));
+        close(context, Rutas('', {}));
       },
       icon: const Icon(Icons.arrow_back),
     );
@@ -110,16 +109,33 @@ class SearchCountryDelegate extends SearchDelegate<Rutas> {
     _filter = linea.where((linea) {
       return linea.name.toLowerCase().contains(query.trim().toLowerCase());
     }).toList();
+
     return ListView.builder(
       itemCount: _filter.length,
       itemBuilder: (_, index) {
         return ListTile(
           title: Text(_filter[index].name),
           onTap: () {
-            var ruta = _filter[index].Polyline;
-            //print(ruta);
+            var ruta = _filter[index].polyline;
+            Set<Marker> markers = {};
+            for (var element in ruta) {
+              Set<Marker> puntos = { 
+                Marker(
+                  markerId: MarkerId('${element.polylineId.value}Partida'),
+                  position: element.points.first,
+                  icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+                  infoWindow: const InfoWindow(title: 'Partida'),
+                ),
+                Marker(
+                  markerId: MarkerId('${element.polylineId.value}Llegada'),
+                  position: element.points.last,
+                  infoWindow: const InfoWindow(title: 'Llegada'),
+                ),
+              };
+              markers.addAll(puntos);
+            }
             Navigator.push(context,MaterialPageRoute(
-              builder: (context) => RutaPage(lin: ruta,)
+              builder: (context) => RutaPage(lin: ruta, markers: markers,)
             ));
           },
         );
@@ -128,14 +144,12 @@ class SearchCountryDelegate extends SearchDelegate<Rutas> {
   }
 }
 
-// ignore: must_be_immutable
 class RutaPage extends StatefulWidget {
-  // ignore: prefer_typing_uninitialized_variables
   var lin;
-  RutaPage({Key? key, required this.lin}) : super(key: key);
+  var markers;
+  RutaPage({Key? key, required this.lin, this.markers}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _RutasPageState createState() => _RutasPageState();
 }
 
@@ -144,10 +158,9 @@ class _RutasPageState extends State<RutaPage> {
       const CameraPosition(target: LatLng(-17.78629, -63.18117), zoom: 13);
 
   @override
-  // ignore: override_on_non_overriding_member
   void iniState() {
-    // ignore: unused_local_variable
     var lin = widget.lin;
+    var markers = widget.markers;
     counter = 1;
     super.initState();
   }
@@ -155,6 +168,7 @@ class _RutasPageState extends State<RutaPage> {
   @override
   Widget build(BuildContext context) {
     var rut = widget.lin;
+    var puntos = widget.markers;
     return Scaffold(
       body: Stack(children: <Widget>[
         Padding(
@@ -166,6 +180,7 @@ class _RutasPageState extends State<RutaPage> {
                   initialCameraPosition: _initialCameraPosition,
                   myLocationButtonEnabled: true,
                   polylines: rut,
+                  markers: puntos,
                 ),
               ),
             ],

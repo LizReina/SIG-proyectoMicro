@@ -8,7 +8,7 @@ import 'package:proyecto_bus/widgets/collapsing_navigation_drawer.dart';
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -43,9 +43,22 @@ class HomePage extends StatelessWidget {
                               return GestureDetector(
                                 onTap: () {
                                   Set<Polyline> polyline = {poly};
+                                  Set<Marker> markers = {
+                                    Marker(
+                                      markerId: const MarkerId('Partida'),
+                                      position: poly.points.first,
+                                      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+                                      infoWindow: const InfoWindow(title: 'Partida'),
+                                    ),
+                                    Marker(
+                                      markerId: const MarkerId('Llegada'),
+                                      position: poly.points.last,
+                                      infoWindow: const InfoWindow(title: 'Llegada'),
+                                    )
+                                  };
                                   Navigator.push(context,MaterialPageRoute(
                                     //AGREGAR MARKERS DE PARTIDA Y LLEGADA
-                                    builder: (context) => RutaPage(lin: polyline,)
+                                    builder: (context) => RutaPage(lin: polyline, markers: markers,)
                                   ));
                                 },
                                 child: Container(
