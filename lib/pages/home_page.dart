@@ -8,7 +8,7 @@ import 'package:proyecto_bus/widgets/collapsing_navigation_drawer.dart';
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(

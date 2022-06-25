@@ -1,8 +1,4 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
-
-// ignore: unused_import
-//import 'package:flutter_map/flutter_map.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_controller/google_maps_controller.dart';
 
 class Rutas {
   late final String name;
@@ -10,4 +6,21 @@ class Rutas {
   Set<Polyline> polyline;
 
   Rutas(this.name, this.polyline);
+}
+
+class ida {
+  late String name;
+  late List ini;
+  //late Set<Polyline> ini={Polyline(points: )};
+  ida(this.name, this.ini);
+}
+
+class vuelta {
+  late String name;
+  late List fin;
+  vuelta(this.name, this.fin);
+}
+
+class lista {
+  late LatLng ini;
 }
