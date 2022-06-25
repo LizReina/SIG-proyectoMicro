@@ -1,4 +1,4 @@
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_controller/google_maps_controller.dart';
 
 class Rutas {
   late final String name;
