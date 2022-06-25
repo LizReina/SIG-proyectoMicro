@@ -51,40 +51,27 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
         color: Colors.transparent,
         child: Column(
           children: <Widget>[
-            const SizedBox(
-              height: 50.0,
-            ),
-            /*
-            InkWell(
-                onTap: () {
-                  setState(() {
-                    isCollapsed = !isCollapsed;
-                    isCollapsed
-                        ? _animationController.forward()
-                        : _animationController.reverse();
-                  });
-                },
-                child: AnimatedIcon(
-                  icon: AnimatedIcons.close_menu,
-                  progress: _animationController,
-                  color: Colors.white,
-                  size: 30.0,
-                )),
-            const SizedBox(
-              height: 50.0,
-            ),
-            const Divider(
-              color: Colors.grey,
-              height: 12.0,
-            ),
-            */
-            const SizedBox(
-              height: 50.0,
-            ),
-            const Divider(
-              color: Colors.grey,
-              height: 12.0,
-            ),
+            const SizedBox(height: 50.0,),
+            /*InkWell(
+              onTap: () {
+                setState(() {
+                  isCollapsed = !isCollapsed;
+                  isCollapsed
+                    ? _animationController.forward()
+                    : _animationController.reverse();
+                });
+              },
+              child: AnimatedIcon(
+                icon: AnimatedIcons.close_menu,
+                progress: _animationController,
+                color: Colors.white,
+                size: 30.0,
+              )
+            ),*/
+            const SizedBox(height: 50.0,),
+            const Divider(color: Colors.grey,height: 12.0,),
+            const SizedBox(height: 50.0,),
+            const Divider(color: Colors.grey, height: 12.0,),
             Expanded(
               child: ListView.separated(
                 separatorBuilder: (context, counter) {

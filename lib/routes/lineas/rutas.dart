@@ -3,9 +3,9 @@ import 'package:google_maps_controller/google_maps_controller.dart';
 class Rutas {
   late final String name;
   // ignore: non_constant_identifier_names
-  late final Polyline;
+  Set<Polyline> polyline;
 
-  Rutas(this.name, this.Polyline);
+  Rutas(this.name, this.polyline);
 }
 
 class ida {

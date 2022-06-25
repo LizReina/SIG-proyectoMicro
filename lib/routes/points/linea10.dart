@@ -504,6 +504,7 @@ List<LatLng> linea10I = [
   const LatLng(-17.71489426, -63.16868191),
   const LatLng(-17.7148167, -63.1690811),
 ];
+
 List<LatLng> linea10V = [
   const LatLng(-17.810668, -63.1191503),
   const LatLng(-17.81029018, -63.11916103),

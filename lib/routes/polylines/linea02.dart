@@ -4,13 +4,13 @@ import 'package:proyecto_bus/routes/points/linea02.dart';
 
 final Set<Polyline> linea02 = {
   Polyline(
-    polylineId: const PolylineId('L02I'),
+    polylineId: const PolylineId('Linea 2 (ida)'),
     width: 2,
     points: linea02I,
     color: const Color.fromARGB(255, 74, 176, 78)
   ),
   Polyline(
-    polylineId: const PolylineId('L02V'),
+    polylineId: const PolylineId('Linea 2 (vuelta)'),
     points: linea02V,
     width: 2,
     color: const Color.fromARGB(255, 49, 106, 51)

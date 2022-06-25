@@ -3,10 +3,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:proyecto_bus/routes/points/linea01.dart';
 import 'package:proyecto_bus/routes/points/linea02.dart';
 import 'package:proyecto_bus/routes/points/linea05.dart';
-import 'package:proyecto_bus/routes/points/linea05V.dart';
 import 'package:proyecto_bus/routes/points/linea08.dart';
 import 'package:proyecto_bus/routes/points/linea09.dart';
 import 'package:proyecto_bus/routes/points/linea10.dart';
+import 'package:proyecto_bus/routes/points/linea11.dart';
 import 'package:proyecto_bus/routes/points/linea16.dart';
 import 'package:proyecto_bus/routes/points/linea17.dart';
 import 'package:proyecto_bus/routes/points/linea18.dart';
@@ -83,6 +83,18 @@ final Set<Polyline> rutas = {
     polylineId: const PolylineId('L10V'),
     width: 2,
     color: const Color.fromARGB(255, 236, 215, 55),
+  ),
+  Polyline(
+    points: linea11I,
+    polylineId: const PolylineId('L11I'),
+    width: 2,
+    color: const Color.fromARGB(255, 232, 139, 26),
+  ),
+  Polyline(
+    points: linea11V,
+    polylineId: const PolylineId('L11V'),
+    width: 2,
+    color: const Color.fromARGB(255, 211, 239, 33),
   ),
   Polyline(
     points: linea16I,
