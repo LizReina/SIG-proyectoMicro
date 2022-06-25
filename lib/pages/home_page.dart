@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _initialCameraPosition =
-      const CameraPosition(target: LatLng(-17.78629, -63.18117), zoom: 17);
+      const CameraPosition(target: LatLng(-17.78629, -63.18117), zoom: 13);
 
   @override
   void initState() {

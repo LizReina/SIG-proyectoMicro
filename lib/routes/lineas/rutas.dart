@@ -1,7 +1,4 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
-
-// ignore: unused_import
-import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 class Rutas {
   late final String name;
@@ -9,4 +6,21 @@ class Rutas {
   late final Polyline;
 
   Rutas(this.name, this.Polyline);
+}
+
+class ida {
+  late String name;
+  late List ini;
+  //late Set<Polyline> ini={Polyline(points: )};
+  ida(this.name, this.ini);
+}
+
+class vuelta {
+  late String name;
+  late List fin;
+  vuelta(this.name, this.fin);
+}
+
+class lista {
+  late LatLng ini;
 }
