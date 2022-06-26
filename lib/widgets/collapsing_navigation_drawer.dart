@@ -96,7 +96,7 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ShowLineaPage()));
+                                  builder: (context) => const SearchList()));
                         }
                       });
                     },

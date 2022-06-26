@@ -1,0 +1,74 @@
+import 'package:flutter/material.dart';
+import 'package:proyecto_bus/pages/home_page.dart';
+import 'package:proyecto_bus/pages/ver_lineas_page.dart';
+
+class MenuWidget extends StatelessWidget {
+  const MenuWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Column(
+        children: <Widget>[
+          const SizedBox(height: 20,),
+          DrawerHeader(
+            padding: const EdgeInsets.all(0),
+            child: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/app_icon.PNG'),
+                  fit: BoxFit.cover
+                )
+              ),
+            )
+          ),
+          ListTile(
+            title: const Text('Mapa',
+              style: TextStyle(fontSize: 18.0, color: Colors.grey),
+            ),
+            leading: const Icon(
+              Icons.map,
+              size: 20.0,
+              color: Colors.grey,
+            ),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const HomePage()
+              ));
+            },
+          ),
+          ListTile(
+            title: const Text('Buscar Linea',
+              style: TextStyle(fontSize: 18.0, color: Colors.grey),
+            ),
+            leading: const Icon(
+              Icons.search,
+              size: 20.0,
+              color: Colors.grey,
+            ),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const SearchList()
+              ));
+            },
+          ),
+          ListTile(
+            title: const Text('Esperando Micro',
+              style: TextStyle(fontSize: 18.0, color: Colors.grey),
+            ),
+            leading: const Icon(
+              Icons.adjust_sharp,
+              size: 20.0,
+              color: Colors.grey,
+            ),
+            onTap: () {
+                /* Navigator.pop(context);
+                Navigator.of(context).push(new MaterialPageRoute(
+                builder: (context) => dealerBuilder()));*/
+            },
+          ),                           
+        ],
+      ),
+    );
+  }
+}

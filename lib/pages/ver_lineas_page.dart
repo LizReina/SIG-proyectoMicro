@@ -1,7 +1,7 @@
-// ignore_for_file: library_private_types_in_public_api, body_might_complete_normally_nullable, must_be_immutable, prefer_typing_uninitialized_variables, override_on_non_overriding_member, unused_local_variable
+// ignore_for_file: library_private_types_in_public_api, body_might_complete_normally_nullable, must_be_immutable, prefer_typing_uninitialized_variables, override_on_non_overriding_member, unused_local_variable, prefer_collection_literals
 
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:proyecto_bus/pages/select_dir_page.dart';
 import 'package:proyecto_bus/routes/lineas/rutas.dart';
 import 'package:proyecto_bus/routes/polylines/linea01.dart';
 import 'package:proyecto_bus/routes/polylines/linea02.dart';
@@ -14,10 +14,9 @@ import 'package:proyecto_bus/routes/polylines/linea16.dart';
 import 'package:proyecto_bus/routes/polylines/linea17.dart';
 import 'package:proyecto_bus/routes/polylines/linea18.dart';
 import 'package:proyecto_bus/variables.dart';
-import 'package:proyecto_bus/widgets/collapsing_navigation_drawer.dart';
 
-class ShowLineaPage extends StatefulWidget {
-  const ShowLineaPage({Key? key}) : super(key: key);
+class SearchList extends StatefulWidget {
+  const SearchList({Key? key}) : super(key: key);
 
   @override
   _SearchListState createState() => _SearchListState();
@@ -83,7 +82,6 @@ class SearchCountryDelegate extends SearchDelegate<Rutas> {
   }
 
   @override
-  // ignore: body_might_complete_normally_nullable
   Widget? buildLeading(BuildContext context) {
     IconButton(
       onPressed: () {
@@ -117,13 +115,13 @@ class SearchCountryDelegate extends SearchDelegate<Rutas> {
           return ListTile(
             title: Text(_filter[index].name),
             onTap: () {
-              String nam = _filter[index].name;
-              var ruta = _filter[index].Polyline;
-              //print(ruta);
+              String nombre = _filter[index].name;
+              var ruta = _filter[index].polyline;
+              debugPrint(nombre);
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ShowLinea(lin: ruta, name: nam)));
+                      builder: (context) => ShowLinea(lin: ruta, name: nombre)));
             },
           );
         }
@@ -131,6 +129,8 @@ class SearchCountryDelegate extends SearchDelegate<Rutas> {
   }
 }
 
+
+/*
 class ShowLinea extends StatefulWidget {
   String name;
   var lin;
@@ -138,7 +138,6 @@ class ShowLinea extends StatefulWidget {
   ShowLinea({Key? key, required this.lin, required this.name})
       : super(key: key);
   @override
-  // ignore: no_logic_in_create_state
   _ShowLineaState createState() => _ShowLineaState();
 }
 
@@ -153,29 +152,29 @@ class _ShowLineaState extends State<ShowLinea> {
       Rutas("vuelta", linea),
       Rutas("ambas", linea)
     ];
-    final List<ida> ini = [
-      ida("linea 1", linea01I),
-      ida("linea 2", linea02I),
-      ida("linea 5", linea05I),
-      ida("linea 8", linea08I),
-      ida("linea 9", linea09I),
-      ida("linea 10", linea10I),
-      ida("linea 11", linea11I),
-      ida("linea 16", linea16I),
-      ida("linea 17", linea17I),
-      ida("linea 18", linea18I),
+    final List<Ida> ini = [
+      Ida("linea 1", linea01I),
+      Ida("linea 2", linea02I),
+      Ida("linea 5", linea05I),
+      Ida("linea 8", linea08I),
+      Ida("linea 9", linea09I),
+      Ida("linea 10", linea10I),
+      Ida("linea 11", linea11I),
+      Ida("linea 16", linea16I),
+      Ida("linea 17", linea17I),
+      Ida("linea 18", linea18I),
     ];
-    final List<vuelta> fin = [
-      vuelta("linea 1", linea01V),
-      vuelta("linea 2", linea02V),
-      vuelta("linea 5", linea05V),
-      vuelta("linea 8", linea08V),
-      vuelta("linea 9", linea09V),
-      vuelta("linea 10", linea10V),
-      vuelta("linea 11", linea11V),
-      vuelta("linea 16", linea16V),
-      vuelta("linea 17", linea17V),
-      vuelta("linea 18", linea18V),
+    final List<Vuelta> fin = [
+      Vuelta("linea 1", linea01V),
+      Vuelta("linea 2", linea02V),
+      Vuelta("linea 5", linea05V),
+      Vuelta("linea 8", linea08V),
+      Vuelta("linea 9", linea09V),
+      Vuelta("linea 10", linea10V),
+      Vuelta("linea 11", linea11V),
+      Vuelta("linea 16", linea16V),
+      Vuelta("linea 17", linea17V),
+      Vuelta("linea 18", linea18V),
     ];
     return Scaffold(
       appBar: AppBar(
@@ -187,10 +186,9 @@ class _ShowLineaState extends State<ShowLinea> {
         itemCount: select.length,
         itemBuilder: (_, index) {
           return ListTile(
-            // ignore: prefer_interpolation_to_compose_strings
             title: Text(select[index].name),
             onTap: () {
-              var sel = select[index].Polyline;
+              var sel = select[index].polyline;
               if (select[index].name == "ida") {
                 for (int i = 0; i < ini.length; i++) {
                   if (nombre == ini[i].name) {
@@ -236,7 +234,7 @@ class _ShowLineaState extends State<ShowLinea> {
                   }
                 }
               } else if (select[index].name == "ambas") {
-                sel = select[index].Polyline;
+                sel = select[index].polyline;
                 for (int i = 0; i < ini.length; i++) {
                   if (nombre == ini[i].name) {
                     List<LatLng> com = ini[i].ini as List<LatLng>;
@@ -272,80 +270,4 @@ class _ShowLineaState extends State<ShowLinea> {
     );
   }
 }
-
-// ignore: must_be_immutable
-class RutaPage extends StatefulWidget {
-  // ignore: prefer_typing_uninitialized_variables
-  LatLng inicio, fin;
-  var lin;
-
-  RutaPage(
-      {Key? key, required this.lin, required this.inicio, required this.fin})
-      : super(key: key);
-
-  @override
-  // ignore: library_private_types_in_public_api, no_logic_in_create_state
-  _RutasPageState createState() => _RutasPageState();
-}
-
-class _RutasPageState extends State<RutaPage> {
-  final Set<Marker> markers = new Set();
-  final _initialCameraPosition =
-      const CameraPosition(target: LatLng(-17.78629, -63.18117), zoom: 13);
-  // ignore: unused_field
-  static const LatLng show = LatLng(-17.78629, -63.18117);
-
-  void iniState() {
-    super.initState();
-  }
-
-  Set<Marker> get getmarkers {
-    setState(() {
-      markers.add(Marker(
-        markerId: const MarkerId("inicio"),
-        position: widget.inicio,
-        // ignore: prefer_const_constructors
-        infoWindow: InfoWindow(
-          title: 'inicio',
-        ),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-      ));
-      markers.add(Marker(
-        markerId: const MarkerId("fin"),
-        position: widget.fin,
-        infoWindow: const InfoWindow(
-          title: "fin de la ruta",
-        ),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-      ));
-    });
-    return markers;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var rut = widget.lin;
-    var puntos = widget.markers;
-    return Scaffold(
-      body: Stack(children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(0),
-          child: Column(
-            children: [
-              Flexible(
-                child: GoogleMap(
-                  initialCameraPosition: _initialCameraPosition,
-                  myLocationButtonEnabled: true,
-                  polylines: rut,
-                  markers: getmarkers,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const CollapsingNavigationDrawer(),
-      ]),
-    );
-    // ignore: dead_code
-  }
-}
+*/

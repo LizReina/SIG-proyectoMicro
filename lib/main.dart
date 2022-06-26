@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const HomePage(),
-        '/lineas': (context) => const ShowLineaPage(),
+        '/lineas': (context) => const SearchList(),
       },
     );
   }

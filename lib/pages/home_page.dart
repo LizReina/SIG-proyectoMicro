@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_bus/controllers/home_controller.dart';
-import 'package:proyecto_bus/pages/ver_lineas_page.dart';
-import 'package:proyecto_bus/widgets/collapsing_navigation_drawer.dart';
+import 'package:proyecto_bus/pages/ruta_page.dart';
+import 'package:proyecto_bus/widgets/drawer_widget.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
@@ -11,11 +11,15 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return ChangeNotifierProvider(
       create: (_) => HomeController(),
       child: Scaffold(  
+        key: scaffoldKey,
+        resizeToAvoidBottomInset: false,
+        drawer: const MenuWidget(),
         body: Stack(
-          children: <Widget> [
+          children: <Widget> [          
             Padding(
               padding: const EdgeInsets.all(0),
               child: Consumer<HomeController>(
@@ -43,7 +47,9 @@ class HomePage extends StatelessWidget {
                               return GestureDetector(
                                 onTap: () {
                                   Set<Polyline> polyline = {poly};
-                                  Set<Marker> markers = {
+                                  LatLng inicio = LatLng(poly.points.first.latitude, poly.points.first.longitude);
+                                  LatLng fin = LatLng(poly.points.last.latitude, poly.points.last.longitude);
+                                  /*Set<Marker> markers = {
                                     Marker(
                                       markerId: const MarkerId('Partida'),
                                       position: poly.points.first,
@@ -55,10 +61,9 @@ class HomePage extends StatelessWidget {
                                       position: poly.points.last,
                                       infoWindow: const InfoWindow(title: 'Llegada'),
                                     )
-                                  };
+                                  };*/
                                   Navigator.push(context,MaterialPageRoute(
-                                    //AGREGAR MARKERS DE PARTIDA Y LLEGADA
-                                    builder: (context) => RutaPage(lin: polyline, markers: markers,)
+                                    builder: (context) => RutaPage(lin: polyline, inicio: inicio, fin: fin,)
                                   ));
                                 },
                                 child: Container(
@@ -90,7 +95,32 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            const CollapsingNavigationDrawer(),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(20, 50, 20, 0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Card(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    color: Theme.of(context).primaryColorDark,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    child: IconButton(                        
+                      icon: Icon(
+                        Icons.menu,
+                        color: Theme.of(context).bottomAppBarColor,
+                        size: 20,
+                      ),
+                      onPressed: () => scaffoldKey.currentState?.openDrawer(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            //const CollapsingNavigationDrawer(),
           ] 
         ),
       )
