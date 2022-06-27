@@ -69,8 +69,7 @@ class _RutasPageState extends State<RutaPage> {
                   polylines: rut,
                   markers: getmarkers,
                 ),
-              ),
-              
+              ),             
             ],
           ),
         ),
