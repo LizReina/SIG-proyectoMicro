@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_bus/pages/home_page.dart';
+import 'package:proyecto_bus/pages/map_page.dart';
 import 'package:proyecto_bus/pages/ver_lineas_page.dart';
 
 class MenuWidget extends StatelessWidget {
@@ -53,18 +54,18 @@ class MenuWidget extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('Esperando Micro',
+            title: const Text('Mostrar lineas',
               style: TextStyle(fontSize: 18.0, color: Colors.grey),
             ),
             leading: const Icon(
-              Icons.adjust_sharp,
+              Icons.route,
               size: 20.0,
               color: Colors.grey,
             ),
             onTap: () {
-                /* Navigator.pop(context);
-                Navigator.of(context).push(new MaterialPageRoute(
-                builder: (context) => dealerBuilder()));*/
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const MapPage()
+              ));
             },
           ),                           
         ],
