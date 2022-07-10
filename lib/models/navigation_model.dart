@@ -11,7 +11,7 @@ class NavigationModel {
 }
 
 List<NavigationModel> navigationItems = [
-  NavigationModel(title: "Líneas", icon: Icons.bus_alert),
+  NavigationModel(title: "Mapa", icon: Icons.map),
+  //NavigationModel(title: "Líneas", icon: Icons.bus_alert),
   NavigationModel(title: "Buscar", icon: Icons.search),
-  NavigationModel(title: "Mapa", icon: Icons.map)
 ];

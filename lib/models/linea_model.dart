@@ -1,4 +1,3 @@
-
 class LineaModel {
   LineaModel({
     required this.title,

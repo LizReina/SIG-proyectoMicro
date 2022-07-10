@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_bus/pages/home_page.dart';
+import 'package:proyecto_bus/pages/ver_lineas_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,13 +15,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'App Pasajero',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       debugShowCheckedModeBanner: false,
       debugShowMaterialGrid: false,
       initialRoute: '/',
       routes: {
         '/': (context) => const HomePage(),
+        '/lineas': (context) => const SearchList(),
       },
     );
   }
