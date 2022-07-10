@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:proyecto_bus/routes/markers/markers.dart';
 import 'package:proyecto_bus/routes/polylines/all_lineas.dart';
+import 'package:proyecto_bus/widgets/drawer_widget.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({Key? key}) : super(key: key);
@@ -16,13 +18,55 @@ class _MapPageState extends State<MapPage> {
     zoom: 13
   );
   
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        initialCameraPosition: _initialCameraPosition,
-        myLocationButtonEnabled: true,
-        polylines: rutas,
+      key: scaffoldKey,
+      resizeToAvoidBottomInset: false,
+      drawer: const MenuWidget(),
+      body: Stack(
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: GoogleMap(
+                  initialCameraPosition: _initialCameraPosition,
+                  myLocationButtonEnabled: true,
+                  polylines: rutas,
+                  markers: markers,
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(20, 50, 20, 0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Card(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  color: Theme.of(context).primaryColorDark,
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  child: IconButton(                        
+                    icon: Icon(
+                      Icons.menu,
+                      color: Theme.of(context).bottomAppBarColor,
+                      size: 20,
+                    ),
+                    onPressed: () => scaffoldKey.currentState?.openDrawer(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ]
       ),
     );
   }

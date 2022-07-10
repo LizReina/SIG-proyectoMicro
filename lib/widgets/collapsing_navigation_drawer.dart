@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_bus/models/navigation_model.dart';
-import 'package:proyecto_bus/pages/map_page.dart';
+import 'package:proyecto_bus/pages/home_page.dart';
 import 'package:proyecto_bus/pages/ver_lineas_page.dart';
 import 'package:proyecto_bus/widgets/collapsing_list_tile.dart';
 
@@ -12,7 +12,8 @@ class CollapsingNavigationDrawer extends StatefulWidget {
       _CollapsingNavigationDrawerState();
 }
 
-class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer> with SingleTickerProviderStateMixin {
+class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
+    with SingleTickerProviderStateMixin {
   double maxWidth = 70; //250
   double minWidth = 70;
   bool isCollapsed = false;
@@ -51,30 +52,24 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
         child: Column(
           children: <Widget>[
             const SizedBox(height: 50.0,),
-            /*
-            InkWell(
-                onTap: () {
-                  setState(() {
-                    isCollapsed = !isCollapsed;
-                    isCollapsed
-                        ? _animationController.forward()
-                        : _animationController.reverse();
-                  });
-                },
-                child: AnimatedIcon(
-                  icon: AnimatedIcons.close_menu,
-                  progress: _animationController,
-                  color: Colors.white,
-                  size: 30.0,
-                )),
-            const SizedBox(
-              height: 50.0,
-            ),
-            const Divider(
-              color: Colors.grey,
-              height: 12.0,
-            ),
-            */
+            /*InkWell(
+              onTap: () {
+                setState(() {
+                  isCollapsed = !isCollapsed;
+                  isCollapsed
+                    ? _animationController.forward()
+                    : _animationController.reverse();
+                });
+              },
+              child: AnimatedIcon(
+                icon: AnimatedIcons.close_menu,
+                progress: _animationController,
+                color: Colors.white,
+                size: 30.0,
+              )
+            ),*/
+            const SizedBox(height: 50.0,),
+            const Divider(color: Colors.grey,height: 12.0,),
             const SizedBox(height: 50.0,),
             const Divider(color: Colors.grey, height: 12.0,),
             Expanded(
@@ -91,16 +86,17 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                         currentSelectedIndex = counter;
                         // ignore: avoid_print
                         print('Counter: $counter');
+
                         if (counter == 0) {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ShowLineaPage()));
-                        } else if (counter == 2) {
+                                  builder: (context) => const HomePage()));
+                        } else if (counter == 1) {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const MapPage()));
+                                  builder: (context) => const SearchList()));
                         }
                       });
                     },
