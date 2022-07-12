@@ -20,6 +20,8 @@ dependencies:
   provider: ^5.0.0
   google_maps_controller: ^1.2.0
   flutter_map: ^1.1.0
+  permission_handler: ^10.0.0
+  geolocator: ^9.0.0
 
 dev_dependencies:
   flutter_test:
