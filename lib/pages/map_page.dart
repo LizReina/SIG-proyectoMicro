@@ -13,11 +13,9 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  final _initialCameraPosition = const CameraPosition(
-    target: LatLng(-17.78629, -63.18117),
-    zoom: 13
-  );
-  
+  final _initialCameraPosition =
+      const CameraPosition(target: LatLng(-17.78629, -63.18117), zoom: 13);
+
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -26,48 +24,47 @@ class _MapPageState extends State<MapPage> {
       key: scaffoldKey,
       resizeToAvoidBottomInset: false,
       drawer: const MenuWidget(),
-      body: Stack(
-        children: [
-          Column(
+      body: Stack(children: [
+        Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Expanded(
+              child: GoogleMap(
+                initialCameraPosition: _initialCameraPosition,
+                myLocationEnabled: true,
+                myLocationButtonEnabled: true,
+                polylines: rutas,
+                markers: markers,
+              ),
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(20, 50, 20, 0),
+          child: Row(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Expanded(
-                child: GoogleMap(
-                  initialCameraPosition: _initialCameraPosition,
-                  myLocationButtonEnabled: true,
-                  polylines: rutas,
-                  markers: markers,
+              Card(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                color: Theme.of(context).primaryColorDark,
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40),
+                ),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.menu,
+                    color: Theme.of(context).bottomAppBarColor,
+                    size: 20,
+                  ),
+                  onPressed: () => scaffoldKey.currentState?.openDrawer(),
                 ),
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(20, 50, 20, 0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Card(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  color: Theme.of(context).primaryColorDark,
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40),
-                  ),
-                  child: IconButton(                        
-                    icon: Icon(
-                      Icons.menu,
-                      color: Theme.of(context).bottomAppBarColor,
-                      size: 20,
-                    ),
-                    onPressed: () => scaffoldKey.currentState?.openDrawer(),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ]
-      ),
+        ),
+      ]),
     );
   }
 }
