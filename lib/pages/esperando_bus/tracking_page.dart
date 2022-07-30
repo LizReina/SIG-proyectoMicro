@@ -60,18 +60,19 @@ class _TrackingPageState extends State<TrackingPage> {
       body: Stack(children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(0),
-          child: Column(
-            children: [
-              Flexible(
+          child: StreamBuilder<Object>(
+            stream: null,
+            builder: (context, snapshot) {
+              return Flexible(
                 child: GoogleMap(
                   initialCameraPosition: _initialCameraPosition,
                   myLocationButtonEnabled: true,
                   polylines: rut,
                   markers: getmarkers,
                 ),
-              ),             
-            ],
-          ),
+              );
+            }
+          ),             
         ),
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(20, 50, 20, 0),
