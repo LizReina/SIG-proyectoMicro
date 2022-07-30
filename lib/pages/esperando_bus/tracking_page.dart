@@ -1,8 +1,12 @@
 // ignore_for_file: must_be_immutable, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:proyecto_bus/drawer_widget.dart';
+import 'package:proyecto_bus/models/api_response.dart';
+import 'package:proyecto_bus/models/recorrido_model.dart';
+import 'package:proyecto_bus/services/recorrido_controller.dart';
 
 class TrackingPage extends StatefulWidget {
   LatLng inicio, fin;
@@ -23,31 +27,55 @@ class _TrackingPageState extends State<TrackingPage> {
   final Set<Marker> markers = {};
   final _initialCameraPosition = const CameraPosition(target: LatLng(-17.78629, -63.18117), zoom: 13);
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  late Position currentLocation;
+  final Set<Marker> _markers = {};
+  List<dynamic> _postBus = [];
 
-  void iniState() {
+  @override
+  void initState() {
     super.initState();
+    setState(() {
+      getUserLocation();
+    });
   }
 
   Set<Marker> get getmarkers {
     setState(() {
-      markers.add(Marker(
-        markerId: const MarkerId("inicio"),
-        position: widget.inicio,
-        infoWindow: const InfoWindow(
-          title: 'Partida',
-        ),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-      ));
-      markers.add(Marker(
-        markerId: const MarkerId("fin"),
-        position: widget.fin,
-        infoWindow: const InfoWindow(
-          title: "Llegada",
-        ),
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-      ));
+      markers.add(
+        Marker(
+          markerId: const MarkerId("inicio"),
+          position: widget.inicio,
+          infoWindow: const InfoWindow(title: 'Partida',),
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+        )
+      );
+      markers.add(
+        Marker(
+          markerId: const MarkerId("fin"),
+          position: widget.fin,
+          infoWindow: const InfoWindow(title: "Llegada",),
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+        )
+      );
     });
     return markers;
+  }
+
+  getUserLocation() async {
+    ApiResponse response = await getBusToday();
+    setState(() {
+      _postBus = response.data as List<dynamic>;
+      for (int i = 0; i < _postBus.length; i++) {
+        Bus bus = _postBus[i];
+        _markers.add(
+          Marker(
+            markerId: MarkerId(bus.interno.toString()),
+            position: LatLng(double.parse(bus.latitud.toString()), double.parse(bus.longitud.toString())),           
+            infoWindow: InfoWindow(title: 'Interno: ${bus.interno}',)
+          )
+        );
+      }
+    });
   }
 
   @override
@@ -68,7 +96,7 @@ class _TrackingPageState extends State<TrackingPage> {
                   initialCameraPosition: _initialCameraPosition,
                   myLocationButtonEnabled: true,
                   polylines: rut,
-                  markers: getmarkers,
+                  markers: _markers,
                 ),
               );
             }
