@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:proyecto_bus/widgets/drawer_widget.dart';
+import 'package:proyecto_bus/drawer_widget.dart';
 
 class RutaPage extends StatefulWidget {
   LatLng inicio, fin;
@@ -99,21 +99,34 @@ class _RutasPageState extends State<RutaPage> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 100, top: 20, right: 20),
+          padding: const EdgeInsets.only(left: 140, top: 20, right: 40, bottom: 670),
           child: Card(
             elevation: 10.0,
             shadowColor: Colors.grey.withOpacity(0.5),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
             ),
-            child: ListTile(
-              title: Text(
-                widget.lin.first.polylineId.value.toString(),
-                style: const TextStyle(fontSize: 20,),
-              ),
-              leading: CircleAvatar(
-                backgroundColor:  widget.lin.first.color,
-              )
+            child: Column(
+              children: [
+                ListTile(
+                  title: Text(
+                    widget.lin.first.polylineId.value.toString(),
+                    style: const TextStyle(fontSize: 20,),
+                  ),
+                  leading: CircleAvatar(
+                    backgroundColor:  widget.lin.first.color,
+                  )
+                ),
+                ListTile(
+                  title: Text(
+                    widget.lin.last.polylineId.value.toString(),
+                    style: const TextStyle(fontSize: 20,),
+                  ),
+                  leading: CircleAvatar(
+                    backgroundColor:  widget.lin.last.color,
+                  )
+                ),
+              ],
             )
           ),
         )

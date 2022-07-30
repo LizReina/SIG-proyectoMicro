@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_bus/pages/home_page.dart';
-import 'package:proyecto_bus/pages/ver_lineas_page.dart';
+import 'package:proyecto_bus/pages/buscar_linea/buscar_page.dart';
 
 void main() {
   runApp(const MyApp());

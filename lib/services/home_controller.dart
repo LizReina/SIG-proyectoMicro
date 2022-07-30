@@ -2,9 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:proyecto_bus/controllers/route_controller.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:proyecto_bus/services/route_controller.dart';
 
 class RequestPermissionController {
   final Permission _locationPermission;

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_bus/controllers/home_controller.dart';
-import 'package:proyecto_bus/pages/ruta_page.dart';
-import 'package:proyecto_bus/widgets/drawer_widget.dart';
+import 'package:proyecto_bus/pages/buscar_linea/ruta_page.dart';
+import 'package:proyecto_bus/drawer_widget.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:proyecto_bus/services/home_controller.dart';
 
-// ignore: must_be_immutable
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -35,8 +33,7 @@ class _HomePageState extends State<HomePage> {
           drawer: const MenuWidget(),
           body: Stack(children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(
-                  left: 0.0, top: 45.0, right: 0.0, bottom: 0.0),
+              padding: const EdgeInsets.only(left: 0.0, top: 28.0, right: 0.0, bottom: 0.0),
               child: Consumer<HomeController>(
                 builder: (_, controller, __) => Column(
                   children: [
@@ -52,86 +49,53 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     (controller.listpoly.isEmpty)
-                        ? const SizedBox(
-                            width: 2,
-                            height: 2,
-                          )
-                        : SizedBox(
-                            height: 150,
-                            child: SingleChildScrollView(
-                                child: controller.listpoly.isEmpty
-                                    ? const SizedBox(
-                                        width: 2,
-                                        height: 2,
+                    ? const SizedBox(width: 2, height: 2,)
+                    : SizedBox(
+                        height: 150,
+                        child: SingleChildScrollView(
+                          child: controller.listpoly.isEmpty
+                          ? const SizedBox(width: 2, height: 2,)
+                          : Column(
+                              children: controller.listpoly.map((poly) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    Set<Polyline> polyline = {poly};
+                                    LatLng inicio = LatLng(
+                                      poly.points.first.latitude,
+                                      poly.points.first.longitude);
+                                    LatLng fin = LatLng(
+                                      poly.points.last.latitude,
+                                      poly.points.last.longitude);                                            
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => RutaPage(lin: polyline, inicio: inicio, fin: fin,)
                                       )
-                                    : Column(
-                                        children:
-                                            controller.listpoly.map((poly) {
-                                          return GestureDetector(
-                                              onTap: () {
-                                                Set<Polyline> polyline = {poly};
-                                                LatLng inicio = LatLng(
-                                                    poly.points.first.latitude,
-                                                    poly.points.first
-                                                        .longitude);
-                                                LatLng fin = LatLng(
-                                                    poly.points.last.latitude,
-                                                    poly.points.last.longitude);
-                                                /*Set<Marker> markers = {
-                                    Marker(
-                                      markerId: const MarkerId('Partida'),
-                                      position: poly.points.first,
-                                      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-                                      infoWindow: const InfoWindow(title: 'Partida'),
-                                    ),
-                                    Marker(
-                                      markerId: const MarkerId('Llegada'),
-                                      position: poly.points.last,
-                                      infoWindow: const InfoWindow(title: 'Llegada'),
+                                    );
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.only(left: 20, right: 20),
+                                    height: 70,
+                                    child: Card(
+                                      elevation: 10.0,
+                                      shadowColor: Colors.grey.withOpacity(0.5),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(15.0),
+                                      ),
+                                      child: ListTile(
+                                        title: Text(
+                                          poly.polylineId.value.toString(),
+                                          style: const TextStyle(fontSize: 20,),
+                                        ),
+                                        leading: CircleAvatar(backgroundColor: poly.color,)
+                                      )
                                     )
-                                  };*/
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            RutaPage(
-                                                              lin: polyline,
-                                                              inicio: inicio,
-                                                              fin: fin,
-                                                            )));
-                                              },
-                                              child: Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 20, right: 20),
-                                                  height: 70,
-                                                  child: Card(
-                                                      elevation: 10.0,
-                                                      shadowColor: Colors.grey
-                                                          .withOpacity(0.5),
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(15.0),
-                                                      ),
-                                                      child: ListTile(
-                                                          title: Text(
-                                                            poly.polylineId
-                                                                .value
-                                                                .toString(),
-                                                            style:
-                                                                const TextStyle(
-                                                              fontSize: 20,
-                                                            ),
-                                                          ),
-                                                          leading: CircleAvatar(
-                                                            backgroundColor:
-                                                                poly.color,
-                                                          )))));
-                                        }).toList(),
-                                      )),
-                          )
+                                  )
+                                );
+                              }).toList(),
+                            )
+                        ),
+                      )
                   ],
                 ),
               ),
@@ -161,8 +125,9 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            //const CollapsingNavigationDrawer(),
-          ]),
-        ));
+          ]
+        ),
+      )
+    );
   }
 }

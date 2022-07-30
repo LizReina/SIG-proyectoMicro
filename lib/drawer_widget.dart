@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_bus/pages/esperando_bus/search_page.dart';
 import 'package:proyecto_bus/pages/home_page.dart';
 import 'package:proyecto_bus/pages/map_page.dart';
-import 'package:proyecto_bus/pages/ver_lineas_page.dart';
+import 'package:proyecto_bus/pages/buscar_linea/buscar_page.dart';
 
 class MenuWidget extends StatelessWidget {
   const MenuWidget({Key? key}) : super(key: key);
@@ -54,6 +55,21 @@ class MenuWidget extends StatelessWidget {
             },
           ),
           ListTile(
+            title: const Text('Esperando micro',
+              style: TextStyle(fontSize: 18.0, color: Colors.grey),
+            ),
+            leading: const Icon(
+              Icons.route,
+              size: 20.0,
+              color: Colors.grey,
+            ),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const BuscarPage()
+              ));
+            },
+          ),
+          ListTile(
             title: const Text('Mostrar lineas',
               style: TextStyle(fontSize: 18.0, color: Colors.grey),
             ),
@@ -67,7 +83,7 @@ class MenuWidget extends StatelessWidget {
                 builder: (context) => const MapPage()
               ));
             },
-          ),                           
+          ), 
         ],
       ),
     );

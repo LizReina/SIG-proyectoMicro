@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:proyecto_bus/routes/markers/markers.dart';
 import 'package:proyecto_bus/routes/polylines/all_lineas.dart';
-import 'package:proyecto_bus/widgets/drawer_widget.dart';
+import 'package:proyecto_bus/drawer_widget.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({Key? key}) : super(key: key);
