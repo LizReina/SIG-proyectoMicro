@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:proyecto_bus/global.dart';
-import 'package:proyecto_bus/pages/buscar_linea/ruta_page.dart';
 import 'package:proyecto_bus/pages/esperando_bus/tracking_page.dart';
 import 'package:proyecto_bus/routes/lineas/rutas.dart';
 
@@ -57,7 +56,7 @@ class _TipoPageState extends State<TipoPage> {
                     width: polyline.first.width
                   )};
                   Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => RutaPage(
+                    builder: (context) => TrackingPage(
                       lin: polyIda,
                       inicio: polyIda.first.points.first,
                       fin: polyIda.first.points.last,

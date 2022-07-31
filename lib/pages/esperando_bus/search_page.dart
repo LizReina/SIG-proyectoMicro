@@ -27,16 +27,16 @@ class _BuscarPageState extends State {
   @override
   Widget build(BuildContext context) {
     final List<Rutas> linea = [
-      Rutas("Linea 1", linea01),
-      Rutas('Linea 2', linea02),
-      Rutas('Linea 5', linea05),
-      Rutas('Linea 8', linea08),
-      Rutas('Linea 9', linea09),
-      Rutas('Linea 10', linea10),
-      Rutas('Linea 11', linea11),
-      Rutas('Linea 16', linea16),
-      Rutas('Linea 17', linea17),
-      Rutas('Linea 18', linea18),
+      Rutas("Línea 1", linea01),
+      Rutas('Línea 2', linea02),
+      Rutas('Línea 5', linea05),
+      Rutas('Línea 8', linea08),
+      Rutas('Línea 9', linea09),
+      Rutas('Línea 10', linea10),
+      Rutas('Línea 11', linea11),
+      Rutas('Línea 16', linea16),
+      Rutas('Línea 17', linea17),
+      Rutas('Línea 18', linea18),
     ];
 
     return Scaffold(

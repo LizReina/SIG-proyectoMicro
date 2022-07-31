@@ -8,8 +8,8 @@ class Bus {
   });
 
   int? id;
-  double? latitud;
-  double? longitud;
+  String? latitud;
+  String? longitud;
   int? interno;
   String? tipo;
   

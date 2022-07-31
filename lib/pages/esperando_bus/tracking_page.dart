@@ -28,19 +28,14 @@ class _TrackingPageState extends State<TrackingPage> {
   final _initialCameraPosition = const CameraPosition(target: LatLng(-17.78629, -63.18117), zoom: 13);
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   late Position currentLocation;
-  final Set<Marker> _markers = {};
   List<dynamic> _postBus = [];
 
-  @override
-  void initState() {
-    super.initState();
+  Future<Set<Marker>> get getmarkers async {
+    ApiResponse response = await getBusToday();
     setState(() {
-      getUserLocation();
-    });
-  }
+      debugPrint('RESPONSE: ${response.data}');
+      _postBus = response.data as List<dynamic>;
 
-  Set<Marker> get getmarkers {
-    setState(() {
       markers.add(
         Marker(
           markerId: const MarkerId("inicio"),
@@ -57,14 +52,27 @@ class _TrackingPageState extends State<TrackingPage> {
           icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
         )
       );
+      
+      for (int i = 0; i < _postBus.length; i++) {
+        Bus bus = _postBus[i];
+        markers.add(
+          Marker(
+            markerId: MarkerId(bus.interno.toString()),
+            position: LatLng(double.parse(bus.latitud.toString()), double.parse(bus.longitud.toString())),           
+            infoWindow: InfoWindow(title: 'Interno: ${bus.interno}',)
+          )
+        );
+      }  
     });
     return markers;
   }
 
-  getUserLocation() async {
+  /*Future<void> getUserLocation() async {
     ApiResponse response = await getBusToday();
     setState(() {
+      debugPrint('Tracking: ${response.data}');
       _postBus = response.data as List<dynamic>;
+      
       for (int i = 0; i < _postBus.length; i++) {
         Bus bus = _postBus[i];
         _markers.add(
@@ -76,6 +84,15 @@ class _TrackingPageState extends State<TrackingPage> {
         );
       }
     });
+  }*/
+
+  @override
+  void initState() {
+    getmarkers;
+    super.initState();
+    /*setState(() {
+      getUserLocation();
+    });*/
   }
 
   @override
@@ -88,18 +105,11 @@ class _TrackingPageState extends State<TrackingPage> {
       body: Stack(children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(0),
-          child: StreamBuilder<Object>(
-            stream: null,
-            builder: (context, snapshot) {
-              return Flexible(
-                child: GoogleMap(
-                  initialCameraPosition: _initialCameraPosition,
-                  myLocationButtonEnabled: true,
-                  polylines: rut,
-                  markers: _markers,
-                ),
-              );
-            }
+          child: GoogleMap(
+                initialCameraPosition: _initialCameraPosition,
+                myLocationButtonEnabled: true,
+                polylines: rut,
+                markers: markers,
           ),             
         ),
         Padding(
