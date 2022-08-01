@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:proyecto_bus/drawer_widget.dart';
+import 'package:proyecto_bus/global.dart';
 
 class RutaPage extends StatefulWidget {
   LatLng inicio, fin;
@@ -59,13 +60,14 @@ class _RutasPageState extends State<RutaPage> {
       drawer: const MenuWidget(),
       body: Stack(children: <Widget>[
         Padding(
-          padding: const EdgeInsets.all(0),
+          padding: const EdgeInsets.only(left: 0.0, top: 28.0, right: 0.0, bottom: 0.0),
           child: Column(
             children: [
               Flexible(
                 child: GoogleMap(
                   initialCameraPosition: _initialCameraPosition,
                   myLocationButtonEnabled: true,
+                  myLocationEnabled: true,
                   polylines: rut,
                   markers: getmarkers,
                 ),
@@ -99,14 +101,15 @@ class _RutasPageState extends State<RutaPage> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 140, top: 20, right: 40, bottom: 670),
+          padding: const EdgeInsets.only(left: 110, top: 40, right: 60, bottom: 650),
           child: Card(
             elevation: 10.0,
             shadowColor: Colors.grey.withOpacity(0.5),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
             ),
-            child: Column(
+            child: tipo == "ambas" 
+            ? Column(
               children: [
                 ListTile(
                   title: Text(
@@ -127,6 +130,15 @@ class _RutasPageState extends State<RutaPage> {
                   )
                 ),
               ],
+            )
+            : ListTile(
+              title: Text(
+                widget.lin.first.polylineId.value.toString(),
+                style: const TextStyle(fontSize: 20,),
+              ),
+              leading: CircleAvatar(
+                backgroundColor: widget.lin.first.color,
+              )
             )
           ),
         )

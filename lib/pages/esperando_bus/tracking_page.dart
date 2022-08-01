@@ -22,20 +22,14 @@ class TrackingPage extends StatefulWidget {
 
 class _TrackingPageState extends State<TrackingPage> {
   final Set<Marker> markers = {};
-  final _initialCameraPosition =
-      const CameraPosition(target: LatLng(-17.78629, -63.18117), zoom: 13);
+  final _initialCameraPosition = const CameraPosition(target: LatLng(-17.78629, -63.18117), zoom: 13);
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   late Position currentLocation;
   List<dynamic> _postBus = [];
 
-  //
-
   Future<Set<Marker>> get getmarkers async {
-    ApiResponse response = await getBusToday();
-    setState(() async {
-      debugPrint('RESPONSE: ${response.data}');
-      _postBus = response.data as List<dynamic>;
-
+    setState(() {
+      markers.clear();
       markers.add(Marker(
         markerId: const MarkerId("inicio"),
         position: widget.inicio,
@@ -52,33 +46,39 @@ class _TrackingPageState extends State<TrackingPage> {
         ),
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
       ));
-
-      // ignore: unused_local_variable
+    });
+    ApiResponse response = await getBusToday();
+    _postBus = response.data as List<dynamic>;
+    // ignore: unused_local_variable
       /*final icon = await BitmapDescriptor.fromAssetImage(
           const ImageConfiguration(size: Size.fromHeight(2)), 'assets/images/bus.png');*/
-      for (int i = 0; i < _postBus.length; i++) {
-        Bus bus = _postBus[i];
-        markers.add(Marker(
-            markerId: MarkerId(bus.interno.toString()),
-            position: LatLng(double.parse(bus.latitud.toString()),
-                double.parse(bus.longitud.toString())),
-            infoWindow: InfoWindow(
-              title: 'Interno: ${bus.interno}',
-            ),
-            //icon: icon
-        ));
-      }
-    });
+    for (int i = 0; i < _postBus.length; i++) {
+      Bus bus = _postBus[i];
+      markers.add(
+        Marker(
+          markerId: MarkerId(bus.interno.toString()),
+          position: LatLng(
+            double.parse(bus.latitud.toString()),
+            double.parse(bus.longitud.toString())
+          ),
+          infoWindow: InfoWindow(
+            title: 'Interno: ${bus.interno}',
+          ),
+          //icon: icon
+        )
+      );
+    }
+    debugPrint('MARKERS: $markers');
     return markers;
   }
 
   Stream<Set<Marker>> coordsStream() async* {
-  while (true) {
-    await Future.delayed(const Duration(seconds: 2));
-    Set<Marker> someCoords = getmarkers as Set<Marker>;
-    yield someCoords;
+    while (true) {
+      await Future.delayed(const Duration(seconds: 1));
+      Set<Marker> someCoords = getmarkers as Set<Marker>;
+      yield someCoords;
+    }
   }
-}
 
   @override
   void initState() {
@@ -95,7 +95,7 @@ class _TrackingPageState extends State<TrackingPage> {
       drawer: const MenuWidget(),
       body: Stack(children: <Widget>[
         Padding(
-          padding: const EdgeInsets.all(0),
+          padding: const EdgeInsets.only(left: 0.0, top: 28.0, right: 0.0, bottom: 0.0),
           child: StreamBuilder<Object>(
             stream: coordsStream(),
             builder: (context, snapshot) {
@@ -135,23 +135,23 @@ class _TrackingPageState extends State<TrackingPage> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 100, top: 20, right: 20),
+          padding: const EdgeInsets.only(left: 110, top: 40, right: 60, bottom: 650),
           child: Card(
-              elevation: 10.0,
-              shadowColor: Colors.grey.withOpacity(0.5),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
+            elevation: 10.0,
+            shadowColor: Colors.grey.withOpacity(0.5),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            child: ListTile(
+              title: Text(
+                widget.lin.first.polylineId.value.toString(),
+                style: const TextStyle(fontSize: 20,),
               ),
-              child: ListTile(
-                  title: Text(
-                    widget.lin.first.polylineId.value.toString(),
-                    style: const TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                  leading: CircleAvatar(
-                    backgroundColor: widget.lin.first.color,
-                  ))),
+              leading: CircleAvatar(
+                backgroundColor: widget.lin.first.color,
+              )
+            )
+          ),
         )
       ]),
     );
