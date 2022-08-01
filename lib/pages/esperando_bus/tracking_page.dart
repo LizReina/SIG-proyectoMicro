@@ -12,12 +12,9 @@ class TrackingPage extends StatefulWidget {
   LatLng inicio, fin;
   Set<Polyline> lin;
 
-  TrackingPage({
-    Key? key, 
-    required this.lin, 
-    required this.inicio, 
-    required this.fin
-  }): super(key: key);
+  TrackingPage(
+      {Key? key, required this.lin, required this.inicio, required this.fin})
+      : super(key: key);
 
   @override
   _TrackingPageState createState() => _TrackingPageState();
@@ -25,44 +22,52 @@ class TrackingPage extends StatefulWidget {
 
 class _TrackingPageState extends State<TrackingPage> {
   final Set<Marker> markers = {};
-  final _initialCameraPosition = const CameraPosition(target: LatLng(-17.78629, -63.18117), zoom: 13);
+  final _initialCameraPosition =
+      const CameraPosition(target: LatLng(-17.78629, -63.18117), zoom: 13);
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   late Position currentLocation;
   List<dynamic> _postBus = [];
 
+  //
+
   Future<Set<Marker>> get getmarkers async {
     ApiResponse response = await getBusToday();
-    setState(() {
+    setState(() async {
       debugPrint('RESPONSE: ${response.data}');
       _postBus = response.data as List<dynamic>;
 
-      markers.add(
-        Marker(
-          markerId: const MarkerId("inicio"),
-          position: widget.inicio,
-          infoWindow: const InfoWindow(title: 'Partida',),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-        )
-      );
-      markers.add(
-        Marker(
-          markerId: const MarkerId("fin"),
-          position: widget.fin,
-          infoWindow: const InfoWindow(title: "Llegada",),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-        )
-      );
-      
+      markers.add(Marker(
+        markerId: const MarkerId("inicio"),
+        position: widget.inicio,
+        infoWindow: const InfoWindow(
+          title: 'Partida',
+        ),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+      ));
+      markers.add(Marker(
+        markerId: const MarkerId("fin"),
+        position: widget.fin,
+        infoWindow: const InfoWindow(
+          title: "Llegada",
+        ),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+      ));
+
+      // ignore: unused_local_variable
+      final icon = await BitmapDescriptor.fromAssetImage(
+          const ImageConfiguration(), 'assets/bus.png');
+
       for (int i = 0; i < _postBus.length; i++) {
         Bus bus = _postBus[i];
-        markers.add(
-          Marker(
+        markers.add(Marker(
             markerId: MarkerId(bus.interno.toString()),
-            position: LatLng(double.parse(bus.latitud.toString()), double.parse(bus.longitud.toString())),           
-            infoWindow: InfoWindow(title: 'Interno: ${bus.interno}',)
-          )
-        );
-      }  
+            position: LatLng(double.parse(bus.latitud.toString()),
+                double.parse(bus.longitud.toString())),
+            infoWindow: InfoWindow(
+              title: 'Interno: ${bus.interno}',
+            ),
+            icon: icon));
+      }
     });
     return markers;
   }
@@ -106,11 +111,11 @@ class _TrackingPageState extends State<TrackingPage> {
         Padding(
           padding: const EdgeInsets.all(0),
           child: GoogleMap(
-                initialCameraPosition: _initialCameraPosition,
-                myLocationButtonEnabled: true,
-                polylines: rut,
-                markers: markers,
-          ),             
+            initialCameraPosition: _initialCameraPosition,
+            myLocationButtonEnabled: true,
+            polylines: rut,
+            markers: markers,
+          ),
         ),
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(20, 50, 20, 0),
@@ -125,7 +130,7 @@ class _TrackingPageState extends State<TrackingPage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(40),
                 ),
-                child: IconButton(                        
+                child: IconButton(
                   icon: Icon(
                     Icons.menu,
                     color: Theme.of(context).bottomAppBarColor,
@@ -140,23 +145,23 @@ class _TrackingPageState extends State<TrackingPage> {
         Padding(
           padding: const EdgeInsets.only(left: 100, top: 20, right: 20),
           child: Card(
-            elevation: 10.0,
-            shadowColor: Colors.grey.withOpacity(0.5),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
-            ),
-            child: ListTile(
-              title: Text(
-                widget.lin.first.polylineId.value.toString(),
-                style: const TextStyle(fontSize: 20,),
+              elevation: 10.0,
+              shadowColor: Colors.grey.withOpacity(0.5),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
               ),
-              leading: CircleAvatar(
-                backgroundColor:  widget.lin.first.color,
-              )
-            )
-          ),
+              child: ListTile(
+                  title: Text(
+                    widget.lin.first.polylineId.value.toString(),
+                    style: const TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                  leading: CircleAvatar(
+                    backgroundColor: widget.lin.first.color,
+                  ))),
         )
-      ]
-    ),
-  );}
+      ]),
+    );
+  }
 }

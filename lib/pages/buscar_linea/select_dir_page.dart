@@ -66,11 +66,9 @@ class _ShowLineaState extends State<ShowLinea> {
     return Scaffold(
       appBar: AppBar(
         title: const ListTile(
-          title: Text("Seleccione una ruta",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 22
-            ),
+          title: Text(
+            "Seleccione una ruta",
+            style: TextStyle(color: Colors.white, fontSize: 22),
           ),
         ),
       ),
@@ -84,84 +82,85 @@ class _ShowLineaState extends State<ShowLinea> {
               onTap: () {
                 var polyline = select[index].polyline;
                 if (select[index].name == 'Ruta de Ida') {
-                  Set<Polyline> polyIda = {Polyline(
-                    polylineId: polyline.first.polylineId,
-                    color: polyline.first.color,
-                    points: polyline.first.points,
-                    width: polyline.first.width
-                  )};
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => RutaPage(
-                      lin: polyIda,
-                      inicio: polyIda.first.points.first,
-                      fin: polyIda.first.points.last,
-                    )
-                  ));
+                  Set<Polyline> polyIda = {
+                    Polyline(
+                        polylineId: polyline.first.polylineId,
+                        color: polyline.first.color,
+                        points: polyline.first.points,
+                        width: polyline.first.width)
+                  };
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RutaPage(
+                                lin: polyIda,
+                                inicio: polyIda.first.points.first,
+                                fin: polyIda.first.points.last,
+                              )));
                 } else if (select[index].name == 'Ruta de Vuelta') {
-                  Set<Polyline> polyVuelta = {Polyline(
-                    polylineId: polyline.last.polylineId,
-                    color: polyline.last.color,
-                    points: polyline.last.points,
-                    width: polyline.last.width
-                  )};
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => RutaPage(
-                      lin: polyVuelta,
-                      inicio: polyVuelta.first.points.first,
-                      fin: polyVuelta.first.points.last,
-                    )
-                  ));
+                  Set<Polyline> polyVuelta = {
+                    Polyline(
+                        polylineId: polyline.last.polylineId,
+                        color: polyline.last.color,
+                        points: polyline.last.points,
+                        width: polyline.last.width)
+                  };
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RutaPage(
+                                lin: polyVuelta,
+                                inicio: polyVuelta.first.points.first,
+                                fin: polyVuelta.first.points.last,
+                              )));
                 } else if (select[index].name == 'Ambas') {
                   Set<Polyline> polyAmbas = {
                     Polyline(
-                      polylineId: polyline.first.polylineId,
-                      color: polyline.first.color,
-                      points: polyline.first.points,
-                      width: polyline.first.width
-                    ),
+                        polylineId: polyline.first.polylineId,
+                        color: polyline.first.color,
+                        points: polyline.first.points,
+                        width: polyline.first.width),
                     Polyline(
-                      polylineId: polyline.last.polylineId,
-                      color: polyline.last.color,
-                      points: polyline.last.points,
-                      width: polyline.last.width
-                    )
+                        polylineId: polyline.last.polylineId,
+                        color: polyline.last.color,
+                        points: polyline.last.points,
+                        width: polyline.last.width)
                   };
                   Set<Marker> markerInicio = {
                     Marker(
-                      markerId: MarkerId("inicio${polyAmbas.first.polylineId.value}"),
-                      position: polyAmbas.first.points.first
-                    ),
+                        markerId: MarkerId(
+                            "inicio${polyAmbas.first.polylineId.value}"),
+                        position: polyAmbas.first.points.first),
                     Marker(
-                      markerId: MarkerId("inicio${polyAmbas.last.polylineId.value}"),
-                      position: polyAmbas.last.points.first
-                    ),
+                        markerId: MarkerId(
+                            "inicio${polyAmbas.last.polylineId.value}"),
+                        position: polyAmbas.last.points.first),
                   };
                   Set<Marker> markerFin = {
                     Marker(
-                      markerId: MarkerId("llegada${polyAmbas.first.polylineId.value}"),
-                      position: polyAmbas.first.points.last
-                    ),
+                        markerId: MarkerId(
+                            "llegada${polyAmbas.first.polylineId.value}"),
+                        position: polyAmbas.first.points.last),
                     Marker(
-                      markerId: MarkerId("llegada${polyAmbas.last.polylineId.value}"),
-                      position: polyAmbas.last.points.last
-                    ),
+                        markerId: MarkerId(
+                            "llegada${polyAmbas.last.polylineId.value}"),
+                        position: polyAmbas.last.points.last),
                   };
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => RutaPage(
-                      lin: polyAmbas,
-                      inicio: markerInicio.first.position,
-                      fin: markerFin.first.position,
-                    )
-                  ));
+                  
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RutaPage(
+                                lin: polyAmbas,
+                                inicio: markerInicio.first.position,
+                                fin: markerFin.first.position,
+                              )));
                 }
               },
               child: Container(
                 child: Text(
                   select[index].name,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 22
-                  ),
+                  style: const TextStyle(color: Colors.white, fontSize: 22),
                 ),
                 color: Colors.green,
                 margin: const EdgeInsets.all(10),
