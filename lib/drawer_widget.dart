@@ -59,7 +59,7 @@ class MenuWidget extends StatelessWidget {
               style: TextStyle(fontSize: 18.0, color: Colors.grey),
             ),
             leading: const Icon(
-              Icons.route,
+              Icons.bus_alert,
               size: 20.0,
               color: Colors.grey,
             ),

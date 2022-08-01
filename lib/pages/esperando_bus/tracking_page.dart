@@ -54,9 +54,8 @@ class _TrackingPageState extends State<TrackingPage> {
       ));
 
       // ignore: unused_local_variable
-      final icon = await BitmapDescriptor.fromAssetImage(
-          const ImageConfiguration(), 'assets/bus.png');
-
+      /*final icon = await BitmapDescriptor.fromAssetImage(
+          const ImageConfiguration(size: Size.fromHeight(2)), 'assets/images/bus.png');*/
       for (int i = 0; i < _postBus.length; i++) {
         Bus bus = _postBus[i];
         markers.add(Marker(
@@ -66,7 +65,8 @@ class _TrackingPageState extends State<TrackingPage> {
             infoWindow: InfoWindow(
               title: 'Interno: ${bus.interno}',
             ),
-            icon: icon));
+            //icon: icon
+        ));
       }
     });
     return markers;
@@ -74,7 +74,7 @@ class _TrackingPageState extends State<TrackingPage> {
 
   Stream<Set<Marker>> coordsStream() async* {
   while (true) {
-    await Future.delayed(const Duration(seconds: 10));
+    await Future.delayed(const Duration(seconds: 2));
     Set<Marker> someCoords = getmarkers as Set<Marker>;
     yield someCoords;
   }
@@ -102,6 +102,7 @@ class _TrackingPageState extends State<TrackingPage> {
               return GoogleMap(
                 initialCameraPosition: _initialCameraPosition,
                 myLocationButtonEnabled: true,
+                myLocationEnabled: true,
                 polylines: rut,
                 markers: markers,
               );
