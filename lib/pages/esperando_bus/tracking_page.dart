@@ -67,32 +67,18 @@ class _TrackingPageState extends State<TrackingPage> {
     return markers;
   }
 
-  /*Future<void> getUserLocation() async {
-    ApiResponse response = await getBusToday();
-    setState(() {
-      debugPrint('Tracking: ${response.data}');
-      _postBus = response.data as List<dynamic>;
-      
-      for (int i = 0; i < _postBus.length; i++) {
-        Bus bus = _postBus[i];
-        _markers.add(
-          Marker(
-            markerId: MarkerId(bus.interno.toString()),
-            position: LatLng(double.parse(bus.latitud.toString()), double.parse(bus.longitud.toString())),           
-            infoWindow: InfoWindow(title: 'Interno: ${bus.interno}',)
-          )
-        );
-      }
-    });
-  }*/
+  Stream<Set<Marker>> coordsStream() async* {
+  while (true) {
+    await Future.delayed(const Duration(seconds: 10));
+    Set<Marker> someCoords = getmarkers as Set<Marker>;
+    yield someCoords;
+  }
+}
 
   @override
   void initState() {
     getmarkers;
     super.initState();
-    /*setState(() {
-      getUserLocation();
-    });*/
   }
 
   @override
@@ -105,11 +91,16 @@ class _TrackingPageState extends State<TrackingPage> {
       body: Stack(children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(0),
-          child: GoogleMap(
+          child: StreamBuilder<Object>(
+            stream: coordsStream(),
+            builder: (context, snapshot) {
+              return GoogleMap(
                 initialCameraPosition: _initialCameraPosition,
                 myLocationButtonEnabled: true,
                 polylines: rut,
                 markers: markers,
+              );
+            }
           ),             
         ),
         Padding(
