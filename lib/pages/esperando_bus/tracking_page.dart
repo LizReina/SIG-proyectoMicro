@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:proyecto_bus/asset.dart';
 import 'package:proyecto_bus/drawer_widget.dart';
 import 'package:proyecto_bus/models/api_response.dart';
 import 'package:proyecto_bus/models/recorrido_model.dart';
@@ -27,9 +28,9 @@ class _TrackingPageState extends State<TrackingPage> {
   late Position currentLocation;
   List<dynamic> _postBus = [];
 
-  Future<Set<Marker>> get getmarkers async {
+  /*Future<Set<Marker>> get getmarkers async {
     setState(() {
-      markers.clear();
+      //markers.clear();
       markers.add(Marker(
         markerId: const MarkerId("inicio"),
         position: widget.inicio,
@@ -69,6 +70,48 @@ class _TrackingPageState extends State<TrackingPage> {
       );
     }
     debugPrint('MARKERS: $markers');
+    return markers;
+  }*/
+
+  Future<Set<Marker>> get getmarkers async {
+    ApiResponse response = await getBusToday();
+    setState(() async {
+      debugPrint('RESPONSE: ${response.data}');
+      _postBus = response.data as List<dynamic>;
+
+      markers.add(Marker(
+        markerId: const MarkerId("inicio"),
+        position: widget.inicio,
+        infoWindow: const InfoWindow(
+          title: 'Partida',
+        ),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+      ));
+      markers.add(Marker(
+        markerId: const MarkerId("fin"),
+        position: widget.fin,
+        infoWindow: const InfoWindow(
+          title: "Llegada",
+        ),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+      ));
+
+      // ignore: unused_local_variable
+      final icon =
+          BitmapDescriptor.fromBytes(await assetToBytes('assets/images/bus.png'));
+
+      for (int i = 0; i < _postBus.length; i++) {
+        Bus bus = _postBus[i];
+        markers.add(Marker(
+            markerId: MarkerId(bus.interno.toString()),
+            position: LatLng(double.parse(bus.latitud.toString()),
+                double.parse(bus.longitud.toString())),
+            infoWindow: InfoWindow(
+              title: 'Interno: ${bus.interno}',
+            ),
+            icon: icon));
+      }
+    });
     return markers;
   }
 
